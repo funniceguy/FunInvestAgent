@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://funinvestagent.local/schemas/stock_leverage_risk_gate.schema.json",
+  "title": "StockLeverageRiskGate",
+  "type": "object",
+  "required": [
+    "gate_id",
+    "evaluated_at",
+    "product_identifier",
+    "leverage_factor",
+    "underlying_asset",
+    "scores",
+    "average_score",
+    "critical_blockers",
+    "decision"
+  ],
+  "properties": {
+    "gate_id": {
+      "type": "string"
+    },
+    "evaluated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "product_identifier": {
+      "type": "string"
+    },
+    "leverage_factor": {
+      "type": "number",
+      "minimum": -3,
+      "maximum": 3
+    },
+    "underlying_asset": {
+      "type": "string"
+    },
+    "scores": {
+      "type": "array",
+      "minItems": 10,
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "score"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "score": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 10
+          },
+          "evidence": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "average_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 10
+    },
+    "critical_blockers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "decision": {
+      "type": "string",
+      "enum": [
+        "allowed",
+        "conditional_allowed",
+        "watch_only",
+        "blocked"
+      ]
+    },
+    "max_position_percent": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 10
+    },
+    "max_trade_loss_percent": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 5
+    },
+    "overnight_allowed": {
+      "type": "boolean"
+    }
+  }
+}
+

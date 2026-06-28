@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://funinvestagent.local/schemas/stock_psychology_gate.schema.json",
+  "title": "StockPsychologyGate",
+  "type": "object",
+  "required": [
+    "gate_id",
+    "evaluated_at",
+    "symbol_or_scope",
+    "information_grade",
+    "expectation_state",
+    "position_state",
+    "price_reaction",
+    "flow_persistence",
+    "scores",
+    "average_score",
+    "decision"
+  ],
+  "properties": {
+    "gate_id": {
+      "type": "string"
+    },
+    "evaluated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "symbol_or_scope": {
+      "type": "string"
+    },
+    "information_grade": {
+      "type": "string",
+      "enum": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "unknown"
+      ]
+    },
+    "expectation_state": {
+      "type": "string",
+      "enum": [
+        "under_expected",
+        "in_line",
+        "above_expected",
+        "unknown"
+      ]
+    },
+    "position_state": {
+      "type": "string",
+      "enum": [
+        "under_owned",
+        "balanced",
+        "crowded",
+        "overcrowded",
+        "unknown"
+      ]
+    },
+    "price_reaction": {
+      "type": "string",
+      "enum": [
+        "strong_close",
+        "weak_close",
+        "tail_risk",
+        "recovery",
+        "no_response",
+        "unknown"
+      ]
+    },
+    "flow_persistence": {
+      "type": "string",
+      "enum": [
+        "weak",
+        "mixed",
+        "improving",
+        "persistent",
+        "unknown"
+      ]
+    },
+    "scores": {
+      "type": "array",
+      "minItems": 10,
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "score"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "score": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 10
+          },
+          "evidence": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "average_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 10
+    },
+    "critical_risks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "decision": {
+      "type": "string",
+      "enum": [
+        "actionable",
+        "conditional_watch",
+        "watch_only",
+        "avoid"
+      ]
+    }
+  }
+}
+

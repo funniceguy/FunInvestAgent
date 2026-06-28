@@ -1,0 +1,169 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://funinvestagent.local/schemas/investor_profile.schema.json",
+  "title": "InvestorProfile",
+  "type": "object",
+  "required": [
+    "profile_id",
+    "base_currency",
+    "jurisdictions",
+    "goals",
+    "risk_tolerance",
+    "liquidity_needs",
+    "created_at"
+  ],
+  "properties": {
+    "profile_id": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "base_currency": {
+      "type": "string",
+      "examples": [
+        "KRW",
+        "USD"
+      ]
+    },
+    "jurisdictions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "examples": [
+        [
+          "KR"
+        ],
+        [
+          "KR",
+          "US"
+        ]
+      ]
+    },
+    "monthly_income": {
+      "type": "number",
+      "minimum": 0
+    },
+    "monthly_fixed_expense": {
+      "type": "number",
+      "minimum": 0
+    },
+    "emergency_fund_months": {
+      "type": "number",
+      "minimum": 0
+    },
+    "debt_summary": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "balance",
+          "interest_rate",
+          "maturity"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "balance": {
+            "type": "number"
+          },
+          "interest_rate": {
+            "type": "number"
+          },
+          "maturity": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "goals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "target_amount",
+          "time_horizon_months",
+          "priority"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "target_amount": {
+            "type": "number",
+            "minimum": 0
+          },
+          "time_horizon_months": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "priority": {
+            "type": "string",
+            "enum": [
+              "must_have",
+              "important",
+              "optional"
+            ]
+          }
+        }
+      }
+    },
+    "risk_tolerance": {
+      "type": "object",
+      "required": [
+        "max_drawdown_percent",
+        "reaction_to_loss",
+        "experience_level"
+      ],
+      "properties": {
+        "max_drawdown_percent": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "reaction_to_loss": {
+          "type": "string"
+        },
+        "experience_level": {
+          "type": "string",
+          "enum": [
+            "beginner",
+            "intermediate",
+            "advanced",
+            "professional"
+          ]
+        }
+      }
+    },
+    "liquidity_needs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "amount",
+          "due_date"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number",
+            "minimum": 0
+          },
+          "due_date": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      }
+    }
+  }
+}
+

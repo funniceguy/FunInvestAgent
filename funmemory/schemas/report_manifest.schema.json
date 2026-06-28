@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://funinvestagent.local/schemas/report_manifest.schema.json",
+  "title": "ReportManifest",
+  "type": "object",
+  "required": [
+    "report_id",
+    "report_type",
+    "created_at",
+    "input_summary",
+    "source_ids",
+    "validation_status"
+  ],
+  "properties": {
+    "report_id": {
+      "type": "string"
+    },
+    "report_type": {
+      "type": "string",
+      "enum": [
+        "session_summary",
+        "weekly_market_report",
+        "portfolio_review",
+        "strategy_memo",
+        "legal_risk_memo",
+        "stock_strategy_report",
+        "stock_strategy_review"
+      ]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "input_summary": {
+      "type": "string"
+    },
+    "source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "validation_status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "passed",
+        "needs_revision",
+        "blocked"
+      ]
+    },
+    "validation_notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

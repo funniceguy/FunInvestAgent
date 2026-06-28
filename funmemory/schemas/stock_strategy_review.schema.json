@@ -1,0 +1,179 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://funinvestagent.local/schemas/stock_strategy_review.schema.json",
+  "title": "StockStrategyReview",
+  "type": "object",
+  "required": [
+    "review_id",
+    "strategy_id",
+    "reviewed_at",
+    "period",
+    "performance",
+    "adherence",
+    "psychology_review",
+    "verification_contract",
+    "decision",
+    "next_revision"
+  ],
+  "properties": {
+    "review_id": {
+      "type": "string"
+    },
+    "strategy_id": {
+      "type": "string"
+    },
+    "reviewed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "period": {
+      "type": "object",
+      "required": [
+        "start",
+        "end"
+      ],
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "date"
+        },
+        "end": {
+          "type": "string",
+          "format": "date"
+        }
+      }
+    },
+    "performance": {
+      "type": "object",
+      "required": [
+        "absolute_return_percent",
+        "benchmark_return_percent",
+        "max_drawdown_percent"
+      ],
+      "properties": {
+        "absolute_return_percent": {
+          "type": "number"
+        },
+        "benchmark_return_percent": {
+          "type": "number"
+        },
+        "max_drawdown_percent": {
+          "type": "number"
+        },
+        "hit_rate_percent": {
+          "type": "number"
+        },
+        "average_reward_risk": {
+          "type": "number"
+        }
+      }
+    },
+    "adherence": {
+      "type": "object",
+      "required": [
+        "plan_followed_percent",
+        "stop_loss_followed",
+        "position_size_followed"
+      ],
+      "properties": {
+        "plan_followed_percent": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "stop_loss_followed": {
+          "type": "boolean"
+        },
+        "position_size_followed": {
+          "type": "boolean"
+        }
+      }
+    },
+    "failure_causes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "data_failure",
+          "analysis_failure",
+          "execution_failure",
+          "risk_failure",
+          "random_outcome",
+          "not_failed"
+        ]
+      }
+    },
+    "psychology_review": {
+      "type": "object",
+      "required": [
+        "original_psychology_assumption",
+        "actual_market_reaction",
+        "lesson"
+      ],
+      "properties": {
+        "original_psychology_assumption": {
+          "type": "string"
+        },
+        "actual_market_reaction": {
+          "type": "string"
+        },
+        "bias_or_signal_missed": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "lesson": {
+          "type": "string"
+        }
+      }
+    },
+    "leverage_review": {
+      "type": "object",
+      "required": [
+        "used_leverage",
+        "risk_gate_decision"
+      ],
+      "properties": {
+        "used_leverage": {
+          "type": "boolean"
+        },
+        "risk_gate_decision": {
+          "type": "string",
+          "enum": [
+            "allowed",
+            "conditional_allowed",
+            "watch_only",
+            "blocked",
+            "not_applicable"
+          ]
+        },
+        "daily_reset_or_gap_issue": {
+          "type": "string"
+        },
+        "psychology_failure": {
+          "type": "string"
+        },
+        "next_rule_change": {
+          "type": "string"
+        }
+      }
+    },
+    "verification_contract": {
+      "$ref": "https://funinvestagent.local/schemas/verification_scorecard.schema.json"
+    },
+    "decision": {
+      "type": "string",
+      "enum": [
+        "keep",
+        "reduce",
+        "increase",
+        "rebuild",
+        "stop"
+      ]
+    },
+    "next_revision": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://funinvestagent.local/schemas/portfolio_position.schema.json",
+  "title": "PortfolioPosition",
+  "type": "object",
+  "required": [
+    "position_id",
+    "asset_class",
+    "name",
+    "currency",
+    "market_value",
+    "cost_basis",
+    "liquidity_bucket",
+    "risk_flags"
+  ],
+  "properties": {
+    "position_id": {
+      "type": "string"
+    },
+    "asset_class": {
+      "type": "string",
+      "enum": [
+        "cash",
+        "stock",
+        "bond",
+        "real_estate",
+        "commodity",
+        "fund",
+        "pension",
+        "insurance",
+        "debt",
+        "other"
+      ]
+    },
+    "name": {
+      "type": "string"
+    },
+    "ticker_or_identifier": {
+      "type": "string"
+    },
+    "currency": {
+      "type": "string"
+    },
+    "market_value": {
+      "type": "number"
+    },
+    "cost_basis": {
+      "type": "number"
+    },
+    "unrealized_gain_loss": {
+      "type": "number"
+    },
+    "annual_income": {
+      "type": "number"
+    },
+    "liquidity_bucket": {
+      "type": "string",
+      "enum": [
+        "same_day",
+        "within_1_month",
+        "within_1_year",
+        "long_term_locked",
+        "illiquid"
+      ]
+    },
+    "risk_flags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "market_risk",
+          "interest_rate_risk",
+          "credit_risk",
+          "fx_risk",
+          "liquidity_risk",
+          "leverage_risk",
+          "tax_risk",
+          "legal_risk",
+          "concentration_risk",
+          "complex_product_risk"
+        ]
+      }
+    },
+    "source": {
+      "type": "string"
+    },
+    "data_as_of": {
+      "type": "string",
+      "format": "date"
+    }
+  }
+}
+

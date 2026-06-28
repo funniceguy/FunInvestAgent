@@ -1,0 +1,369 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://funinvestagent.local/schemas/stock_strategy_plan.schema.json",
+  "title": "StockStrategyPlan",
+  "type": "object",
+  "required": [
+    "strategy_id",
+    "created_at",
+    "base_currency",
+    "scope",
+    "market_regime",
+    "product_quote_packet",
+    "psychology_gate",
+    "capital_allocation",
+    "short_term_plan",
+    "value_investing_plan",
+    "risk_controls",
+    "verification_contract",
+    "source_ids",
+    "review_schedule"
+  ],
+  "properties": {
+    "strategy_id": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "base_currency": {
+      "type": "string"
+    },
+    "scope": {
+      "type": "object",
+      "required": [
+        "markets",
+        "strategy_modes",
+        "capital_basis"
+      ],
+      "properties": {
+        "markets": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "strategy_modes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "short_term",
+              "value_investing"
+            ]
+          }
+        },
+        "capital_basis": {
+          "type": "string",
+          "enum": [
+            "actual_amount",
+            "percentage_only"
+          ]
+        }
+      }
+    },
+    "market_regime": {
+      "type": "string",
+      "enum": [
+        "defensive",
+        "neutral",
+        "favorable",
+        "unknown"
+      ]
+    },
+    "psychology_gate": {
+      "$ref": "https://funinvestagent.local/schemas/stock_psychology_gate.schema.json"
+    },
+    "leverage_risk_gate": {
+      "$ref": "https://funinvestagent.local/schemas/stock_leverage_risk_gate.schema.json"
+    },
+    "product_quote_packet": {
+      "type": "object",
+      "required": [
+        "quote_status",
+        "products"
+      ],
+      "properties": {
+        "quote_status": {
+          "type": "string",
+          "enum": [
+            "real_time",
+            "delayed",
+            "stale",
+            "unavailable"
+          ]
+        },
+        "quote_checked_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "products": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "product_name",
+              "symbol",
+              "exchange",
+              "currency",
+              "product_type",
+              "data_as_of",
+              "quote_status",
+              "liquidity_decision",
+              "execution_decision"
+            ],
+            "properties": {
+              "product_name": {
+                "type": "string"
+              },
+              "symbol": {
+                "type": "string"
+              },
+              "isin": {
+                "type": "string"
+              },
+              "exchange": {
+                "type": "string"
+              },
+              "currency": {
+                "type": "string"
+              },
+              "product_type": {
+                "type": "string",
+                "enum": [
+                  "stock",
+                  "etf",
+                  "etn",
+                  "cash_like",
+                  "inverse",
+                  "leveraged",
+                  "other"
+                ]
+              },
+              "data_as_of": {
+                "type": "string"
+              },
+              "quote_status": {
+                "type": "string",
+                "enum": [
+                  "real_time",
+                  "delayed",
+                  "stale",
+                  "unavailable"
+                ]
+              },
+              "current_or_last_price": {
+                "type": "number"
+              },
+              "bid_price": {
+                "type": "number"
+              },
+              "ask_price": {
+                "type": "number"
+              },
+              "bid_size": {
+                "type": "number"
+              },
+              "ask_size": {
+                "type": "number"
+              },
+              "spread_percent": {
+                "type": "number"
+              },
+              "volume": {
+                "type": "number"
+              },
+              "turnover": {
+                "type": "number"
+              },
+              "average_turnover_20d": {
+                "type": "number"
+              },
+              "nav_or_iopv": {
+                "type": "number"
+              },
+              "premium_discount_percent": {
+                "type": "number"
+              },
+              "expense_ratio_percent": {
+                "type": "number"
+              },
+              "leverage_multiple": {
+                "type": "number"
+              },
+              "liquidity_decision": {
+                "type": "string",
+                "enum": [
+                  "high",
+                  "medium",
+                  "low",
+                  "blocked"
+                ]
+              },
+              "execution_decision": {
+                "type": "string",
+                "enum": [
+                  "actionable",
+                  "conditional",
+                  "watch_only",
+                  "blocked"
+                ]
+              },
+              "source_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "capital_allocation": {
+      "type": "object",
+      "required": [
+        "cash_percent",
+        "short_term_percent",
+        "value_core_percent",
+        "value_satellite_percent"
+      ],
+      "properties": {
+        "cash_percent": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "short_term_percent": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "value_core_percent": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "value_satellite_percent": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        }
+      }
+    },
+    "short_term_plan": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "symbol",
+          "thesis",
+          "entry_condition",
+          "stop_condition",
+          "exit_condition",
+          "max_position_percent"
+        ],
+        "properties": {
+          "symbol": {
+            "type": "string"
+          },
+          "thesis": {
+            "type": "string"
+          },
+          "entry_condition": {
+            "type": "string"
+          },
+          "stop_condition": {
+            "type": "string"
+          },
+          "exit_condition": {
+            "type": "string"
+          },
+          "max_position_percent": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100
+          }
+        }
+      }
+    },
+    "value_investing_plan": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "symbol",
+          "thesis",
+          "valuation_basis",
+          "buy_condition",
+          "thesis_break_condition",
+          "target_weight_percent"
+        ],
+        "properties": {
+          "symbol": {
+            "type": "string"
+          },
+          "thesis": {
+            "type": "string"
+          },
+          "valuation_basis": {
+            "type": "string"
+          },
+          "buy_condition": {
+            "type": "string"
+          },
+          "thesis_break_condition": {
+            "type": "string"
+          },
+          "target_weight_percent": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100
+          }
+        }
+      }
+    },
+    "risk_controls": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "verification_contract": {
+      "$ref": "https://funinvestagent.local/schemas/verification_scorecard.schema.json"
+    },
+    "source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "review_schedule": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "review_type",
+          "due_date"
+        ],
+        "properties": {
+          "review_type": {
+            "type": "string",
+            "enum": [
+              "trade_close",
+              "weekly",
+              "monthly",
+              "earnings",
+              "quarterly"
+            ]
+          },
+          "due_date": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      }
+    }
+  }
+}

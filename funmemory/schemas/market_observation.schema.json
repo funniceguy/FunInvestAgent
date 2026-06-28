@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://funinvestagent.local/schemas/market_observation.schema.json",
+  "title": "MarketObservation",
+  "type": "object",
+  "required": [
+    "observation_id",
+    "asset_class",
+    "summary",
+    "source_ids",
+    "data_as_of",
+    "confidence",
+    "staleness_risk"
+  ],
+  "properties": {
+    "observation_id": {
+      "type": "string"
+    },
+    "asset_class": {
+      "type": "string"
+    },
+    "region": {
+      "type": "string"
+    },
+    "summary": {
+      "type": "string"
+    },
+    "metrics": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "value",
+          "unit"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": [
+              "number",
+              "string"
+            ]
+          },
+          "unit": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "data_as_of": {
+      "type": "string",
+      "format": "date"
+    },
+    "source_checked_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "confidence": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ]
+    },
+    "staleness_risk": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ]
+    }
+  }
+}
+

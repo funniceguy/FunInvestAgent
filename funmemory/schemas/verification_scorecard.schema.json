@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://funinvestagent.local/schemas/verification_scorecard.schema.json",
+  "title": "VerificationScorecard",
+  "type": "object",
+  "required": [
+    "final_decision",
+    "weighted_score",
+    "iteration_count",
+    "critical_blockers",
+    "categories",
+    "remaining_weaknesses"
+  ],
+  "properties": {
+    "final_decision": {
+      "type": "string",
+      "enum": [
+        "pass",
+        "conditional_pass",
+        "hold",
+        "stop"
+      ]
+    },
+    "weighted_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "iteration_count": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 3
+    },
+    "critical_blockers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "categories": {
+      "type": "array",
+      "minItems": 10,
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "minimum_score",
+          "final_score",
+          "passed"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "input_suitability",
+              "data_reliability",
+              "product_quote_execution_detail",
+              "investor_psychology",
+              "leverage_product_suitability",
+              "analysis_logic",
+              "strategy_completeness",
+              "risk_control",
+              "execution_feasibility",
+              "reviewability",
+              "expression_safety"
+            ]
+          },
+          "minimum_score": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "first_score": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "second_score": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "final_score": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "passed": {
+            "type": "boolean"
+          },
+          "revision_notes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "remaining_weaknesses": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

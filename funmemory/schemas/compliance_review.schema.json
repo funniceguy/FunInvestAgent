@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://funinvestagent.local/schemas/compliance_review.schema.json",
+  "title": "ComplianceReview",
+  "type": "object",
+  "required": [
+    "review_id",
+    "jurisdiction",
+    "topic",
+    "risk_level",
+    "issues",
+    "required_confirmations",
+    "source_ids",
+    "reviewed_at"
+  ],
+  "properties": {
+    "review_id": {
+      "type": "string"
+    },
+    "jurisdiction": {
+      "type": "string"
+    },
+    "topic": {
+      "type": "string"
+    },
+    "risk_level": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high",
+        "critical"
+      ]
+    },
+    "issues": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "issue",
+          "why_it_matters"
+        ],
+        "properties": {
+          "issue": {
+            "type": "string"
+          },
+          "why_it_matters": {
+            "type": "string"
+          },
+          "possible_action": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "required_confirmations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "reviewed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "professional_review_required": {
+      "type": "boolean"
+    }
+  }
+}
+
