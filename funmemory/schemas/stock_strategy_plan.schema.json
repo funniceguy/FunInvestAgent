@@ -252,6 +252,8 @@
               "symbol",
               "decision",
               "score",
+              "rank_eligible",
+              "risk_signal_count",
               "value_trap_flag"
             ],
             "properties": {
@@ -269,8 +271,42 @@
                   "core_watch",
                   "conditional_watch",
                   "needs_more_verification",
+                  "exception_watch",
+                  "rank_excluded_multi_risk",
                   "excluded"
                 ]
+              },
+              "rank_eligible": {
+                "type": "boolean"
+              },
+              "operating_margin_percent": {
+                "type": "number"
+              },
+              "profitability_metric": {
+                "type": "string"
+              },
+              "risk_signal_count": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 7
+              },
+              "risk_signals": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "low_operating_margin",
+                    "low_roe",
+                    "weak_operating_cash_flow",
+                    "high_debt_or_interest_burden",
+                    "no_growth_catalyst",
+                    "no_shareholder_return",
+                    "weak_institutional_or_foreign_flow"
+                  ]
+                }
+              },
+              "exception_candidate": {
+                "type": "boolean"
               },
               "value_trap_flag": {
                 "type": "string",
