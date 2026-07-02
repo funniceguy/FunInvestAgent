@@ -221,6 +221,191 @@
         }
       }
     },
+    "quality_value_screening": {
+      "type": "object",
+      "required": [
+        "applied",
+        "candidates"
+      ],
+      "properties": {
+        "applied": {
+          "type": "boolean"
+        },
+        "screened_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "market_or_sector_scope": {
+          "type": "string"
+        },
+        "lead_sector_hypothesis": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "candidates": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "symbol",
+              "decision",
+              "score",
+              "value_trap_flag"
+            ],
+            "properties": {
+              "symbol": {
+                "type": "string"
+              },
+              "score": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 100
+              },
+              "decision": {
+                "type": "string",
+                "enum": [
+                  "core_watch",
+                  "conditional_watch",
+                  "needs_more_verification",
+                  "excluded"
+                ]
+              },
+              "value_trap_flag": {
+                "type": "string",
+                "enum": [
+                  "low",
+                  "medium",
+                  "high"
+                ]
+              },
+              "growth_basis": {
+                "type": "string"
+              },
+              "capital_efficiency_basis": {
+                "type": "string"
+              },
+              "valuation_basis": {
+                "type": "string"
+              },
+              "catalysts": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "source_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "critical_blockers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "us_intraday_order_timing": {
+      "type": "object",
+      "required": [
+        "applied",
+        "decision"
+      ],
+      "properties": {
+        "applied": {
+          "type": "boolean"
+        },
+        "decision": {
+          "type": "string",
+          "enum": [
+            "observe",
+            "candidate_keep",
+            "limited_entry",
+            "hold",
+            "reduce",
+            "exit",
+            "blocked"
+          ]
+        },
+        "checked_at_kst": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "et_window": {
+          "type": "string"
+        },
+        "kst_window": {
+          "type": "string"
+        },
+        "session_type": {
+          "type": "string",
+          "enum": [
+            "pre_market",
+            "regular_open",
+            "regular_direction_check",
+            "regular_primary_window",
+            "regular_lunch",
+            "regular_afternoon_review",
+            "regular_close_prep",
+            "closing_auction",
+            "after_hours",
+            "closed",
+            "unknown"
+          ]
+        },
+        "daylight_saving_status": {
+          "type": "string",
+          "enum": [
+            "edt",
+            "est",
+            "unknown"
+          ]
+        },
+        "holiday_or_early_close_checked": {
+          "type": "boolean"
+        },
+        "broker_extended_hours_checked": {
+          "type": "boolean"
+        },
+        "fatigue_gate": {
+          "type": "string",
+          "enum": [
+            "clear",
+            "caution",
+            "blocked",
+            "unknown"
+          ]
+        },
+        "required_observations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "order_method": {
+          "type": "string",
+          "enum": [
+            "limit_only",
+            "split_limit",
+            "watch_only",
+            "blocked"
+          ]
+        },
+        "critical_blockers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "capital_allocation": {
       "type": "object",
       "required": [

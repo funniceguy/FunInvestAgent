@@ -56,6 +56,8 @@
               "data_reliability",
               "product_quote_execution_detail",
               "investor_psychology",
+              "quality_value_screening_suitability",
+              "us_intraday_order_timing_suitability",
               "leverage_product_suitability",
               "analysis_logic",
               "strategy_completeness",

@@ -27,8 +27,12 @@ funagent/
 
 ## 주식 전략 스킬
 
-주식 요청은 `funagent/skills/stocks/stock_orchestrator.md`를 중심으로 조립한다. 오케스트레이터는 데이터 수집, 시장 국면, 후보군 선별, 단타 전술, 가치투자 전략, 포트폴리오 구성, 실행 리스크, 성과 검토 스킬을 필요에 따라 조합한다.
+주식 요청은 `funagent/skills/stocks/stock_orchestrator.md`를 중심으로 조립한다. 오케스트레이터는 데이터 수집, 시장 국면, 후보군 선별, 저평가 우량주 정밀 스크리닝, 단타 전술, 가치투자 전략, 포트폴리오 구성, 실행 리스크, 성과 검토 스킬을 필요에 따라 조합한다.
 
 주식 전략과 최종 리포트는 `stock_verification_contract_skill.md`와 `funagent/rules/verification_score_contract.md`의 평점 계약을 통과해야 한다. 최소 2회 반복 검증하고, 전체 가중 점수 88점 미만 또는 중대 차단 조건이 있으면 결론을 보류/중단으로 낮춘다.
 
 투자자 심리 해석은 필수 게이트다. 주식 전략은 정보 등급, 기대치, 포지션, 가격 반응, 수급 지속성을 해석하고 `stock_psychology_decision_gate_skill.md` 결과가 신규 진입을 허용할 때만 실행 전략으로 승격한다.
+
+저평가 우량주, GARP, 밸류업 수혜주 후보는 `stock_quality_value_screening_skill.md`를 통과해야 한다. 저PER·저PBR·고배당 단독 통과는 금지하며, 성장성, ROE/ROIC, 현금흐름, 부채, PEG 또는 대체 밸류에이션, 촉매, 가치함정 플래그를 검증한다.
+
+미국 주식 장중 수익화·단타·분할 주문 전략은 `stock_us_intraday_order_timing_skill.md`를 통과해야 한다. ET/KST 시간대, 서머타임, 휴장·조기폐장, 프리마켓·애프터마켓 유동성 위험, 한국 시간 피로 게이트를 확인한 뒤 주문 행동을 제한한다.

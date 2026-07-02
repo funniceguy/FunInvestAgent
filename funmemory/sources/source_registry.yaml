@@ -1,4 +1,4 @@
-last_verified: "2026-06-28 KST"
+last_verified: "2026-07-01 KST"
 verification_policy:
   market_data: "보고서 작성 당일 재확인"
   law_and_tax: "원문 법령, 감독기관 자료, 전문가 확인 우선"
@@ -62,6 +62,42 @@ sources:
     use_for:
       - "레버리지/인버스 ETF의 일일 목표, 복리 효과, 장기 보유 위험"
     notes: "3배 레버리지 단타 상품 구조와 투자자 적합성 검토에 사용."
+  - id: finra_extended_hours_trading_risk
+    jurisdiction: "US"
+    category: "investor_alert"
+    owner: "FINRA"
+    title: "Extended-Hours Trading: Know the Risks"
+    url: "https://www.finra.org/investors/insights/extended-hours-trading"
+    use_for:
+      - "미국 프리마켓·애프터마켓 유동성 부족, 변동성, 가격 괴리, 브로커별 주문 제한 확인"
+    notes: "미국 장중 시간대별 주문 전략과 연장거래 리스크 고지에 사용. 2026-07-01 KST 확인."
+  - id: finra_rule_2265_extended_hours_disclosure
+    jurisdiction: "US"
+    category: "regulation"
+    owner: "FINRA"
+    title: "FINRA Rule 2265. Extended Hours Trading Risk Disclosure"
+    url: "https://www.finra.org/rules-guidance/rulebooks/finra-rules/2265"
+    use_for:
+      - "연장거래 위험 고지의 공식 규정 근거"
+    notes: "낮은 유동성, 높은 변동성, 가격 변화, 연결되지 않은 시장, 뉴스 발표, 넓은 스프레드 위험 확인에 사용. 2026-07-01 KST 확인."
+  - id: nyse_trading_hours_calendar
+    jurisdiction: "US"
+    category: "market_structure"
+    owner: "NYSE"
+    title: "Holidays & Trading Hours"
+    url: "https://www.nyse.com/trade/hours-calendars"
+    use_for:
+      - "NYSE, NYSE American, NYSE Arca, NYSE National, NYSE Texas 거래 시간, 휴장, 조기 폐장 확인"
+    notes: "미국장 ET/KST 시간 변환과 휴장·조기폐장 확인에 사용. 2026-07-01 KST 확인."
+  - id: nasdaq_market_hours
+    jurisdiction: "US"
+    category: "market_structure"
+    owner: "Nasdaq"
+    title: "Stock Market Holiday Schedule and Trading Hours"
+    url: "https://www.nasdaq.com/market-activity/stock-market-holiday-schedule"
+    use_for:
+      - "Nasdaq 정규장, 프리마켓, 애프터마켓 시간과 브로커별 연장거래 확인"
+    notes: "Nasdaq 프리마켓 04:00-09:30 ET, 정규장 09:30-16:00 ET, 애프터마켓 16:00-20:00 ET 확인에 사용. 2026-07-01 KST 확인."
   - id: sec_leveraged_inverse_etf_alert
     jurisdiction: "US"
     category: "investor_alert"
