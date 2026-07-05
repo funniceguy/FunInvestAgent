@@ -98,6 +98,9 @@
           "analysis_failure",
           "execution_failure",
           "risk_failure",
+          "forward_outlook_failure",
+          "probability_gate_failure",
+          "flow_fx_mismatch",
           "random_outcome",
           "not_failed"
         ]
@@ -124,6 +127,89 @@
           }
         },
         "lesson": {
+          "type": "string"
+        }
+      }
+    },
+    "forward_outlook_review": {
+      "type": "object",
+      "required": [
+        "used_forward_outlook",
+        "original_decision"
+      ],
+      "properties": {
+        "used_forward_outlook": {
+          "type": "boolean"
+        },
+        "original_decision": {
+          "type": "string",
+          "enum": [
+            "outlook_usable",
+            "conditional_outlook",
+            "watch_only",
+            "blocked",
+            "not_applicable"
+          ]
+        },
+        "actual_market_regime": {
+          "type": "string"
+        },
+        "source_quality_issue": {
+          "type": "string"
+        },
+        "scenario_accuracy": {
+          "type": "string"
+        },
+        "flow_sentiment_accuracy": {
+          "type": "string"
+        },
+        "next_rule_change": {
+          "type": "string"
+        }
+      }
+    },
+    "aggressive_short_term_review": {
+      "type": "object",
+      "required": [
+        "used_gate",
+        "original_decision"
+      ],
+      "properties": {
+        "used_gate": {
+          "type": "boolean"
+        },
+        "original_decision": {
+          "type": "string",
+          "enum": [
+            "aggressive_allowed",
+            "tactical_allowed",
+            "watch_only",
+            "blocked",
+            "not_applicable"
+          ]
+        },
+        "actual_outcome_decision": {
+          "type": "string",
+          "enum": [
+            "worked",
+            "failed",
+            "mixed",
+            "not_applicable"
+          ]
+        },
+        "expectation_accuracy": {
+          "type": "string"
+        },
+        "flow_fx_alignment": {
+          "type": "string"
+        },
+        "price_reaction_accuracy": {
+          "type": "string"
+        },
+        "risk_reward_followed": {
+          "type": "boolean"
+        },
+        "next_rule_change": {
           "type": "string"
         }
       }

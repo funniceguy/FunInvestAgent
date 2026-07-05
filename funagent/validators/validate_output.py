@@ -39,12 +39,16 @@ REQUIRED_STOCK_SKILLS = [
     "funagent/skills/stocks/stock_orchestrator.md",
     "funagent/skills/stocks/stock_intake_scope_skill.md",
     "funagent/skills/stocks/stock_data_collection_skill.md",
+    "funagent/skills/stocks/stock_forward_source_search_skill.md",
+    "funagent/skills/stocks/stock_forward_evidence_extraction_skill.md",
+    "funagent/skills/stocks/stock_forward_outlook_synthesis_skill.md",
     "funagent/skills/stocks/stock_information_event_psychology_skill.md",
     "funagent/skills/stocks/stock_investor_psychology_skill.md",
     "funagent/skills/stocks/stock_market_regime_skill.md",
     "funagent/skills/stocks/stock_universe_screening_skill.md",
     "funagent/skills/stocks/stock_quality_value_screening_skill.md",
     "funagent/skills/stocks/stock_psychology_decision_gate_skill.md",
+    "funagent/skills/stocks/stock_aggressive_short_term_probability_skill.md",
     "funagent/skills/stocks/stock_us_intraday_order_timing_skill.md",
     "funagent/skills/stocks/stock_intraday_psychology_routine_skill.md",
     "funagent/skills/stocks/stock_leverage_product_risk_skill.md",
@@ -75,7 +79,9 @@ REQUIRED_STOCK_SUPPORT_FILES = [
 ]
 
 REQUIRED_STOCK_TEMPLATE_SECTIONS = [
+    "## 차주/미래 전망 근거 검색·발췌·분석",
     "## 투자자 심리 해석 게이트",
+    "## 공격적 단기 매매 확률 게이트",
     "## 레버리지/3배 단타 게이트",
     "## Verify 평점 계약",
     "## 반복 검증 기록",

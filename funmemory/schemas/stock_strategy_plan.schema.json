@@ -50,6 +50,8 @@
             "type": "string",
             "enum": [
               "short_term",
+              "aggressive_short_term",
+              "forward_outlook",
               "value_investing"
             ]
           }
@@ -77,6 +79,129 @@
     },
     "leverage_risk_gate": {
       "$ref": "https://funinvestagent.local/schemas/stock_leverage_risk_gate.schema.json"
+    },
+    "forward_outlook_research": {
+      "type": "object",
+      "required": [
+        "applied",
+        "horizon",
+        "decision",
+        "score",
+        "source_count",
+        "evidence_card_count",
+        "domains_covered",
+        "critical_blockers"
+      ],
+      "properties": {
+        "applied": {
+          "type": "boolean"
+        },
+        "horizon": {
+          "type": "string",
+          "enum": [
+            "next_week",
+            "1_month",
+            "quarter",
+            "6_12_month",
+            "unknown"
+          ]
+        },
+        "searched_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "decision": {
+          "type": "string",
+          "enum": [
+            "outlook_usable",
+            "conditional_outlook",
+            "watch_only",
+            "blocked",
+            "not_applicable"
+          ]
+        },
+        "score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "source_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "primary_source_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "evidence_card_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "domains_covered": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "geopolitics",
+              "macro",
+              "rates_liquidity",
+              "fx",
+              "commodities",
+              "investor_flows",
+              "sentiment",
+              "event_calendar",
+              "earnings"
+            ]
+          }
+        },
+        "base_scenario": {
+          "type": "string"
+        },
+        "bull_scenario": {
+          "type": "string"
+        },
+        "bear_scenario": {
+          "type": "string"
+        },
+        "strategy_direction": {
+          "type": "string",
+          "enum": [
+            "attack",
+            "selective_attack",
+            "neutral",
+            "defensive",
+            "stop",
+            "unknown"
+          ]
+        },
+        "confidence": {
+          "type": "string",
+          "enum": [
+            "high",
+            "medium",
+            "low",
+            "unknown"
+          ]
+        },
+        "invalidation_conditions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "source_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "critical_blockers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     },
     "product_quote_packet": {
       "type": "object",
@@ -339,6 +464,125 @@
               }
             }
           }
+        },
+        "critical_blockers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "aggressive_short_term_probability": {
+      "type": "object",
+      "required": [
+        "applied",
+        "decision",
+        "score",
+        "alignment_count",
+        "risk_reward_ratio",
+        "critical_blockers"
+      ],
+      "properties": {
+        "applied": {
+          "type": "boolean"
+        },
+        "checked_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "decision": {
+          "type": "string",
+          "enum": [
+            "aggressive_allowed",
+            "tactical_allowed",
+            "watch_only",
+            "blocked",
+            "not_applicable"
+          ]
+        },
+        "score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "alignment_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 7
+        },
+        "expectation_state": {
+          "type": "string",
+          "enum": [
+            "under_expected",
+            "in_line",
+            "above_expected",
+            "unknown"
+          ]
+        },
+        "price_reaction_state": {
+          "type": "string",
+          "enum": [
+            "strong",
+            "constructive",
+            "mixed",
+            "weak",
+            "unknown"
+          ]
+        },
+        "institution_foreign_flow_state": {
+          "type": "string",
+          "enum": [
+            "aligned",
+            "mixed",
+            "conflicting",
+            "unknown"
+          ]
+        },
+        "fx_state": {
+          "type": "string",
+          "enum": [
+            "tailwind",
+            "neutral",
+            "headwind",
+            "unknown"
+          ]
+        },
+        "sector_relative_strength_state": {
+          "type": "string",
+          "enum": [
+            "strong",
+            "neutral",
+            "weak",
+            "unknown"
+          ]
+        },
+        "liquidity_state": {
+          "type": "string",
+          "enum": [
+            "high",
+            "medium",
+            "low",
+            "blocked",
+            "unknown"
+          ]
+        },
+        "risk_reward_ratio": {
+          "type": "number",
+          "minimum": 0
+        },
+        "max_loss_percent": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "position_cap_percent": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "required_next_check": {
+          "type": "string"
         },
         "critical_blockers": {
           "type": "array",

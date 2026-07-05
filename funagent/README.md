@@ -31,7 +31,11 @@ funagent/
 
 주식 전략과 최종 리포트는 `stock_verification_contract_skill.md`와 `funagent/rules/verification_score_contract.md`의 평점 계약을 통과해야 한다. 최소 2회 반복 검증하고, 전체 가중 점수 88점 미만 또는 중대 차단 조건이 있으면 결론을 보류/중단으로 낮춘다.
 
+차주 또는 미래 전망 기반 전략은 `stock_forward_source_search_skill.md`, `stock_forward_evidence_extraction_skill.md`, `stock_forward_outlook_synthesis_skill.md`를 순서대로 통과해야 한다. 세계정세, 경제상황, 개인·외국인·기관 심리는 공식/시장 데이터 출처와 근거 카드, 기본/강세/약세 시나리오로 검증한 뒤 전략에 반영한다.
+
 투자자 심리 해석은 필수 게이트다. 주식 전략은 정보 등급, 기대치, 포지션, 가격 반응, 수급 지속성을 해석하고 `stock_psychology_decision_gate_skill.md` 결과가 신규 진입을 허용할 때만 실행 전략으로 승격한다.
+
+공격적 단기 매매는 `stock_aggressive_short_term_probability_skill.md`를 통과해야 한다. 기대치, 가격 반응, 거래대금, 기관/외국인/프로그램 수급, 환율, 상대강도, 손익비가 정렬되지 않으면 신규 진입은 관찰 또는 차단으로 낮춘다.
 
 저평가 우량주, GARP, 밸류업 수혜주 후보는 `stock_quality_value_screening_skill.md`를 통과해야 한다. 저PER·저PBR·고배당 단독 통과는 금지하며, 성장성, ROE/ROIC, 현금흐름, 부채, PEG 또는 대체 밸류에이션, 촉매, 가치함정 플래그를 검증한다.
 

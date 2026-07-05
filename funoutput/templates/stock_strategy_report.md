@@ -6,7 +6,7 @@
 - 작성일:
 - 기준 통화:
 - 시장 범위:
-- 전략 모드: 단타 / 가치투자 / 혼합
+- 전략 모드: 단타 / 공격적 단기 / 가치투자 / 혼합
 
 ## 입력 데이터와 가정
 
@@ -32,6 +32,52 @@
 - 근거:
 - 자금 투입 강도:
 - 경계 이벤트:
+
+## 차주/미래 전망 근거 검색·발췌·분석
+
+- 적용 여부: 예 / 아니오
+- 전망 기간: next_week / 1_month / quarter / 6_12_month / unknown
+- 검색 기준 시각:
+- 최종 판정: outlook_usable / conditional_outlook / watch_only / blocked
+- 전망 점수:
+- 전략 방향: 공격 / 선별 공격 / 중립 / 방어 / 중단
+- 결론 제한 사유:
+
+### 검색 커버리지
+
+| 영역 | 핵심 출처 | source_tier | 기준일 | 사용 가능 여부 |
+|---|---|---|---|---|
+| 세계정세 |  | primary / market_data / trusted_secondary |  |  |
+| 경제상황 |  | primary / market_data / trusted_secondary |  |  |
+| 유동성/환율 |  | primary / market_data / trusted_secondary |  |  |
+| 원자재 |  | primary / market_data / trusted_secondary |  |  |
+| 투자자 심리 |  | primary / market_data / trusted_secondary |  |  |
+| 이벤트 캘린더 |  | primary / market_data / trusted_secondary |  |  |
+
+### 근거 카드
+
+| evidence_id | source_id | fact_type | 발췌 사실 | 시장 전달 경로 | 영향 자산 | 방향 | 신뢰도 | 반대 근거 |
+|---|---|---|---|---|---|---|---|---|
+|  |  | data / schedule / policy / geopolitical / flow / sentiment / opinion |  | rates / fx / liquidity / earnings / risk_appetite / supply_chain / flows |  | risk_on / risk_off / mixed / neutral | high / medium / low |  |
+
+### 시나리오 합성
+
+| 시나리오 | 조건 | 예상 심리/수급 | 유리한 섹터 | 불리한 섹터 | 확인 트리거 | 무효화 조건 |
+|---|---|---|---|---|---|---|
+| 기본 |  | 개인 / 외국인 / 기관 / 프로그램 |  |  |  |  |
+| 강세 |  | 개인 / 외국인 / 기관 / 프로그램 |  |  |  |  |
+| 약세 |  | 개인 / 외국인 / 기관 / 프로그램 |  |  |  |  |
+
+### 전망 기반 전략 연결
+
+- 세계정세 영향:
+- 경제상황 영향:
+- 환율/금리/원자재 영향:
+- 개인 투자심리 예측:
+- 외국인 투자심리 예측:
+- 기관 투자심리 예측:
+- 차주 우선 관찰 지표:
+- 다음 검색/재검증 시각:
 
 ## 투자자 심리 해석 게이트
 
@@ -126,6 +172,38 @@
 - 거래대금/스프레드 기준:
 - 다음 확인 시간:
 - 다음날 관찰 조건:
+
+## 공격적 단기 매매 확률 게이트
+
+- 적용 여부: 예 / 아니오
+- 최종 판정: aggressive_allowed / tactical_allowed / watch_only / blocked
+- 확률 점수:
+- 정렬 카운트: /7
+- 1회 손실 한도:
+- 최대 포지션 비중:
+- 다음 확인 시간:
+
+| 항목 | 점수(0-10) | 상태 | 근거 |
+|---|---:|---|---|
+| 기대치 갭 |  | above / in_line / under / unknown |  |
+| 가격 반응 품질 |  | strong / constructive / mixed / weak |  |
+| 거래대금 확장 |  | expanding / flat / fading / unknown |  |
+| 기관/외국인 정렬 |  | aligned / mixed / conflicting / unknown |  |
+| 수급 지속성 |  | persistent / improving / mixed / weak |  |
+| 환율 순풍 |  | tailwind / neutral / headwind / unknown |  |
+| 섹터/지수 상대강도 |  | strong / neutral / weak / unknown |  |
+| 유동성/스프레드 |  | high / medium / low / blocked |  |
+| 손익비/무효화 |  | R:R / stop / invalidation |  |
+| 심리 청결도 |  | clean / caution / crowded / FOMO |  |
+
+### 공격적 단기 결론
+
+- 진입 조건:
+- 손절 조건:
+- 1차/2차 청산 조건:
+- 무효화 조건:
+- 수급·환율 충돌 여부:
+- 중대 차단 조건:
 
 ## 단타 전략
 
@@ -271,7 +349,9 @@
 | 데이터 신뢰도 |  |  |  | 90 |  |
 | 상품·호가 실행 상세 |  |  |  | 90 |  |
 | 투자자 심리 해석 |  |  |  | 90 |  |
+| 전망 근거 검색·발췌·분석 적합성 |  |  |  | 92 |  |
 | 저평가 우량주 스크리닝 적합성 |  |  |  | 90 |  |
+| 공격적 단기 매매 적합성 |  |  |  | 92 |  |
 | 미국 장중 시간대 주문 적합성 |  |  |  | 90 |  |
 | 레버리지 상품 적합성 |  |  |  | 95 |  |
 | 분석 논리 |  |  |  | 80 |  |
@@ -303,8 +383,17 @@
 - [ ] 호가, 스프레드, 거래대금, 기준 시각 포함
 - [ ] ETF/ETN 후보의 NAV/IOPV, 괴리율, 총보수, 시장조성 상태 포함
 - [ ] 호가 미확인 또는 지연 데이터일 때 신규 주문 결론 제한
+- [ ] 차주/미래 전망 요청이면 신뢰 출처 검색, 근거 카드 발췌, 시나리오 합성 포함
+- [ ] 전망 근거의 source_id, published_at, data_as_of, source_checked_at 포함
+- [ ] 세계정세, 경제상황, 유동성/환율, 원자재, 투자자 심리, 이벤트 캘린더 검색 커버리지 포함
+- [ ] 기본/강세/약세 시나리오와 확인 트리거, 무효화 조건 포함
+- [ ] 개인·외국인·기관·프로그램 심리 예측 분리
 - [ ] 투자자 심리 해석 게이트 포함
 - [ ] 정보, 기대치, 포지션, 가격 반응, 수급 지속성 5단계 해석
+- [ ] 공격적 단기 매매 요청이면 확률 게이트 포함
+- [ ] 공격적 단기 매매의 기대치, 가격 반응, 거래대금, 기관/외국인/프로그램 수급, 환율, 상대강도, 손익비 점수화
+- [ ] 기관/외국인 수급과 환율이 단기 방향성과 충돌하면 watch_only 또는 blocked 판정
+- [ ] 공격적 단기 매매의 손절, 손익비 1.5 이상, 1회 손실 한도, 포지션 상한 포함
 - [ ] 저평가/성장형/미래형 요청이면 확장 유니버스 섹터 스크리닝 포함
 - [ ] 사용자 언급 종목 외 대체 후보와 제외 후보 포함
 - [ ] 좋은 산업, 좋은 기업, 좋은 진입가를 분리

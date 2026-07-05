@@ -8,6 +8,7 @@
 
 - `stock_leverage_product_risk_skill.md`를 먼저 통과한다.
 - `stock_leverage_risk_gate_skill.md` 판정이 `allowed` 또는 `conditional_allowed`여야 한다.
+- `stock_aggressive_short_term_probability_skill.md` 판정이 `aggressive_allowed` 또는 `tactical_allowed`여야 한다.
 - 3배 레버리지 슬리브는 전체 주식 예산의 0-5%가 기본 한도다.
 - 오버나이트는 원칙적으로 금지한다.
 
@@ -30,6 +31,7 @@
 ### 이벤트 추세 지속
 
 - 공시, 실적, 정책 이후 가격과 수급이 같은 방향.
+- 기관/외국인/프로그램 수급과 환율이 기초자산 방향에 역행하지 않음.
 - 첫 급등 추격이 아니라 두 번째 신호 확인.
 - 다음날 시초가 유지 또는 눌림 후 회복.
 
@@ -52,4 +54,3 @@
 - 포지션 크기.
 - 하루 손실 한도.
 - 거래 금지 조건.
-

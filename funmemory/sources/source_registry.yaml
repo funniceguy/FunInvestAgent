@@ -170,6 +170,115 @@ sources:
     use_for:
       - "미국 금리, 인플레이션, 경기 지표 수집"
     notes: "API 키와 시계열 식별자 관리 필요."
+  - id: fed_fomc_calendar
+    jurisdiction: "US"
+    category: "central_bank_calendar"
+    owner: "Board of Governors of the Federal Reserve System"
+    title: "FOMC Meeting calendars and information"
+    url: "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+    use_for:
+      - "FOMC 일정, 성명, 의사록, 점도표 발표 일정 확인"
+      - "차주 금리 이벤트와 시장 기대치 변화 분석"
+    notes: "2026-07-05 KST URL 접근 확인. 차주 전략 작성 시 최신 회의 일정과 발언을 재확인."
+  - id: bls_release_calendar
+    jurisdiction: "US"
+    category: "macro_calendar"
+    owner: "U.S. Bureau of Labor Statistics"
+    title: "Schedule of News Releases"
+    url: "https://www.bls.gov/schedule/news_release/"
+    use_for:
+      - "CPI, PPI, 고용, 임금, 실업률 등 미국 주요 지표 발표 일정 확인"
+    notes: "2026-07-05 KST URL 접근 확인. 월별 페이지로 리다이렉트될 수 있음."
+  - id: bea_release_schedule
+    jurisdiction: "US"
+    category: "macro_calendar"
+    owner: "U.S. Bureau of Economic Analysis"
+    title: "Release Schedule"
+    url: "https://www.bea.gov/news/schedule"
+    use_for:
+      - "GDP, PCE, 개인소득·지출 등 미국 성장·물가 지표 발표 일정 확인"
+    notes: "2026-07-05 KST URL 접근 확인."
+  - id: cftc_commitments_of_traders
+    jurisdiction: "US"
+    category: "market_positioning"
+    owner: "U.S. Commodity Futures Trading Commission"
+    title: "Commitments of Traders"
+    url: "https://www.cftc.gov/MarketReports/CommitmentsofTraders/index.htm"
+    use_for:
+      - "선물 시장 투기·상업 포지션과 달러, 금리, 원자재 심리 확인"
+    notes: "2026-07-05 KST URL 접근 확인. 발표 지연과 보고 기준일을 반드시 함께 기록."
+  - id: eia_weekly_petroleum_status
+    jurisdiction: "US"
+    category: "commodity_data"
+    owner: "U.S. Energy Information Administration"
+    title: "Weekly Petroleum Status Report"
+    url: "https://www.eia.gov/petroleum/supply/weekly/"
+    use_for:
+      - "유가, 재고, 정제, 에너지 섹터 심리와 인플레이션 압력 확인"
+    notes: "2026-07-05 KST URL 접근 확인."
+  - id: imf_world_economic_outlook
+    jurisdiction: "GLOBAL"
+    category: "macro_outlook"
+    owner: "International Monetary Fund"
+    title: "World Economic Outlook"
+    url: "https://www.imf.org/en/Publications/WEO"
+    use_for:
+      - "글로벌 성장률, 물가, 정책 리스크의 장기 전망 확인"
+    notes: "2026-07-05 KST URL 접근 확인. 차주 전략에서는 최신 시장 가격과 별도 재검증."
+  - id: worldbank_global_economic_prospects
+    jurisdiction: "GLOBAL"
+    category: "macro_outlook"
+    owner: "World Bank"
+    title: "Global Economic Prospects"
+    url: "https://www.worldbank.org/en/publication/global-economic-prospects"
+    use_for:
+      - "글로벌 경기, 신흥국 리스크, 성장 둔화/회복 전망 보조 확인"
+    notes: "2026-07-05 KST URL 접근 확인. 장기 전망 보조 근거로 사용."
+  - id: us_treasury_ofac
+    jurisdiction: "US"
+    category: "geopolitical_policy"
+    owner: "U.S. Department of the Treasury, Office of Foreign Assets Control"
+    title: "Office of Foreign Assets Control"
+    url: "https://ofac.treasury.gov/"
+    use_for:
+      - "제재, 지정학 리스크, 특정 국가·기업·원자재 공급망 영향 확인"
+    notes: "2026-07-05 KST URL 접근 확인. 제재 뉴스는 원문 고시와 시행일 확인."
+  - id: ecb_governing_council_calendar
+    jurisdiction: "EU"
+    category: "central_bank_calendar"
+    owner: "European Central Bank"
+    title: "Meetings of the Governing Council and the General Council"
+    url: "https://www.ecb.europa.eu/press/calendars/mgcgc/html/index.en.html"
+    use_for:
+      - "ECB 정책 일정, 유로 금리, 달러/유로와 글로벌 위험선호 영향 확인"
+    notes: "2026-07-05 KST URL 접근 확인."
+  - id: boj_monetary_policy_meetings
+    jurisdiction: "JP"
+    category: "central_bank_calendar"
+    owner: "Bank of Japan"
+    title: "Monetary Policy Meetings"
+    url: "https://www.boj.or.jp/en/mopo/mpmsche_minu/index.htm"
+    use_for:
+      - "BOJ 정책 일정, 엔화, 글로벌 캐리트레이드, 아시아 수급 영향 확인"
+    notes: "2026-07-05 KST URL 접근 확인."
+  - id: aaii_sentiment_survey
+    jurisdiction: "US"
+    category: "investor_sentiment"
+    owner: "AAII"
+    title: "AAII Investor Sentiment Survey"
+    url: "https://www.aaii.com/sentimentsurvey"
+    use_for:
+      - "미국 개인투자자 강세·약세 심리 보조 지표"
+    notes: "2026-07-05 KST URL 접근 확인. 표본과 발표 주기를 확인하고 단독 근거로 쓰지 않음."
+  - id: cme_fedwatch_tool
+    jurisdiction: "US"
+    category: "market_implied_policy"
+    owner: "CME Group"
+    title: "CME FedWatch Tool"
+    url: "https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html"
+    use_for:
+      - "Fed Funds 선물 기반 시장 금리 기대와 FOMC 확률 변화 확인"
+    notes: "2026-07-05 KST URL 접근 확인. 공식 정책 전망이 아니라 시장 가격 기반 기대치로 사용."
   - id: bok_ecos_api
     jurisdiction: "KR"
     category: "macro_data"
