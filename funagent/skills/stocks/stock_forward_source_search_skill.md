@@ -27,6 +27,9 @@
 | 원자재 | 유가, 가스, 구리, 금, 곡물 중 관련 섹터 민감 자산 |
 | 투자자 심리 | 개인 과열/공포, 기관·외국인 수급, 선물 포지션, ETF 자금 흐름 |
 | 이벤트 캘린더 | 차주 경제지표, FOMC/ECB/BOJ/BOK, 실적, 옵션만기, 휴장 |
+| 예측 보정 데이터 | 지수, 외국인·기관·프로그램 수급, 선물, 환율, 해외 선행시장, 1일·3일·5일 변화 |
+| 장기 기업·ETF | DART/SEC 공시, 투자설명서, 주주 보고서, 지수 방법론, 분배 재원, NAV·총수익, 비용·세금 |
+| 자본보전·회복 | 역사적 최대 낙폭, 갭·거래정지, 유동성, 상관 스트레스, 이익·FCF·부채·희석, 주문 체결 위험 |
 
 ## 우선 source_id
 
@@ -36,6 +39,8 @@
 - 세계정세/제재: `us_treasury_ofac`, 공식 정부·국제기구 발표.
 - 개인/기관 심리: `aaii_sentiment_survey`, `krx_data_marketplace`, `kcmi_behavioral_bias`, `kcmi_investor_type_trading`.
 - 장기 글로벌 전망: `imf_world_economic_outlook`, `worldbank_global_economic_prospects`.
+- 장기 목표·ETF·커버드콜: `sec_investor_compound_interest`, `oic_covered_call_strategy`, `cboe_index_income_buywrite`, `sec_fund_return_of_capital_report`, `sec_investor_etf_nav_spread`, `sec_investor_fund_fees_2025`, `sec_edgar_apis`, `krx_data_marketplace`. 상품별 운용사 공시는 `globalx_qyld_official_product`와 같은 사례를 형식 참고용으로만 사용하고 실제 후보의 최신 공식 페이지를 다시 찾는다.
+- 자본보전·실행 위험: `sec_investor_asset_allocation`, `finra_risk`, `sec_stop_order_execution_risk`, `sec_investor_guaranteed_return_red_flags`, 거래소·브로커 공식 주문 규정.
 
 ## 검색 절차
 
@@ -44,8 +49,11 @@
 3. `funmemory/sources/source_registry.yaml`에서 공식/1차 출처 ID를 먼저 고른다.
 4. 검색어를 `시장 + 기간 + 이벤트 + 데이터명` 형태로 만든다.
 5. 각 필수 검색 영역에서 최소 1개 이상 출처를 확보한다. 공격적 단기 전략은 수급·환율·이벤트 캘린더를 반드시 포함한다.
-6. 출처별 `published_at`, `data_as_of`, `source_checked_at`, `source_tier`를 기록한다.
-7. 공식 출처와 보조 출처가 충돌하면 공식 출처를 우선하고, 충돌 사실을 리포트에 남긴다.
+6. 내일/주간 방향 예측이 포함되면 예측 보정 데이터의 최신값, 1일 변화, 3일 변화, 5일 누적값을 확인할 수 있는 출처를 확보한다.
+7. 출처별 `published_at`, `data_as_of`, `source_checked_at`, `source_tier`를 기록한다.
+8. 공식 출처와 보조 출처가 충돌하면 공식 출처를 우선하고, 충돌 사실을 리포트에 남긴다.
+9. 장기·배당·커버드콜 요청은 상품별 최신 투자설명서, 주주 보고서, 분배 재원 공시, 지수 방법론, 운용사 NAV·총수익 페이지를 모두 확보한다.
+10. 검색 결과의 높은 분배율 문구만 남기지 말고 SEC yield, 원금환급, NAV, 일반 기초자산 벤치마크를 찾을 수 없는 상품은 누락 출처로 기록한다.
 
 ## 최신성 기준
 

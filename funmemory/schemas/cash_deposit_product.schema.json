@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "cash_deposit_product.schema.json",
+  "title": "Cash and Deposit Product",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["product_id", "display_name", "institution_legal_name", "product_type", "currency", "data_as_of", "protection", "rates", "limits", "liquidity", "cashflows", "evidence_ids"],
+  "properties": {
+    "product_id": {"type": "string", "minLength": 1},
+    "display_name": {"type": "string", "minLength": 1},
+    "institution_legal_name": {"type": "string", "minLength": 1},
+    "product_type": {"enum": ["parking_deposit", "demand_deposit", "term_deposit", "installment_savings", "cma", "mmf", "rp", "commercial_paper_note", "treasury_bill", "individual_bond", "bond_etf", "other"]},
+    "currency": {"type": "string", "minLength": 3, "maxLength": 3},
+    "data_as_of": {"type": "string", "minLength": 1},
+    "protection": {
+      "type": "object",
+      "required": ["status", "authority", "limit_as_of", "limit_amount", "institution_aggregate_amount", "protected_amount", "unprotected_amount"],
+      "properties": {
+        "status": {"enum": ["protected", "not_protected", "partial", "unknown"]},
+        "authority": {"type": ["string", "null"]},
+        "limit_as_of": {"type": ["string", "null"]},
+        "limit_amount": {"type": ["number", "null"], "minimum": 0},
+        "institution_aggregate_amount": {"type": ["number", "null"], "minimum": 0},
+        "protected_amount": {"type": ["number", "null"], "minimum": 0},
+        "unprotected_amount": {"type": ["number", "null"], "minimum": 0}
+      }
+    },
+    "rates": {
+      "type": "object",
+      "required": ["base_rate", "realistic_rate", "headline_max_rate", "rate_type"],
+      "properties": {
+        "base_rate": {"type": ["number", "null"]},
+        "realistic_rate": {"type": ["number", "null"]},
+        "headline_max_rate": {"type": ["number", "null"]},
+        "rate_type": {"enum": ["fixed", "variable", "expected", "unknown"]},
+        "promotion_end_at": {"type": ["string", "null"]},
+        "post_promotion_rate": {"type": ["number", "null"]}
+      }
+    },
+    "limits": {
+      "type": "object",
+      "required": ["minimum_amount", "maximum_amount", "preferred_rate_cap"],
+      "properties": {
+        "minimum_amount": {"type": ["number", "null"], "minimum": 0},
+        "maximum_amount": {"type": ["number", "null"], "minimum": 0},
+        "preferred_rate_cap": {"type": ["number", "null"], "minimum": 0},
+        "monthly_contribution_cap": {"type": ["number", "null"], "minimum": 0}
+      }
+    },
+    "conditions": {"type": "array", "items": {"type": "string"}},
+    "liquidity": {
+      "type": "object",
+      "required": ["withdrawal_access", "early_termination_rate", "settlement_days"],
+      "properties": {
+        "withdrawal_access": {"enum": ["immediate", "partial_allowed", "maturity_only", "market_sale", "restricted", "unknown"]},
+        "early_termination_rate": {"type": ["number", "null"]},
+        "settlement_days": {"type": ["integer", "null"], "minimum": 0},
+        "penalties": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "cashflows": {
+      "type": "object",
+      "required": ["total_contributions", "gross_interest", "tax", "fees", "net_maturity_amount", "net_simple_return", "annualized_money_weighted_return"],
+      "properties": {
+        "total_contributions": {"type": "number", "minimum": 0},
+        "gross_interest": {"type": "number"},
+        "tax": {"type": "number", "minimum": 0},
+        "fees": {"type": "number", "minimum": 0},
+        "net_maturity_amount": {"type": "number", "minimum": 0},
+        "net_simple_return": {"type": "number"},
+        "annualized_money_weighted_return": {"type": ["number", "null"]}
+      }
+    },
+    "unknowns": {"type": "array", "items": {"type": "string"}},
+    "evidence_ids": {"type": "array", "minItems": 1, "items": {"type": "string"}}
+  }
+}
+

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "crypto_evidence_card.schema.json",
+  "title": "Crypto Evidence Card",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["evidence_id", "source_id", "url", "published_at", "data_as_of", "checked_at", "asset_display_name", "network", "contract_address", "fact", "calculation", "interpretation", "conflicts", "limitations"],
+  "properties": {
+    "evidence_id": {"type": "string", "minLength": 1},
+    "source_id": {"type": "string", "minLength": 1},
+    "url": {"type": "string", "format": "uri"},
+    "published_at": {"type": ["string", "null"], "format": "date-time"},
+    "data_as_of": {"type": "string", "format": "date-time"},
+    "checked_at": {"type": "string", "format": "date-time"},
+    "asset_display_name": {"type": "string", "minLength": 1},
+    "network": {"type": ["string", "null"]},
+    "contract_address": {"type": ["string", "null"]},
+    "block_height": {"type": ["integer", "null"], "minimum": 0},
+    "fact": {"type": "string", "minLength": 1},
+    "calculation": {"type": ["string", "null"]},
+    "interpretation": {"type": "string", "minLength": 1},
+    "conflicts": {"type": "array", "items": {"type": "string"}},
+    "limitations": {"type": "array", "minItems": 1, "items": {"type": "string"}}
+  }
+}
+

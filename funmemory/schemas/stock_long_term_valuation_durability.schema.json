@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "stock_long_term_valuation_durability.schema.json",
+  "title": "Stock Long-Term Valuation Durability",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["display_name", "symbol", "data_as_of", "earnings_basis", "valuation", "durability", "expected_return", "score", "ranking_eligibility", "invalidation_conditions"],
+  "properties": {
+    "display_name": {"type": "string", "minLength": 1},
+    "symbol": {"type": "string", "minLength": 1},
+    "data_as_of": {"type": "string", "minLength": 1},
+    "earnings_basis": {
+      "type": "object",
+      "required": ["normalized_eps", "normalized_fcf", "normalization_notes"],
+      "properties": {
+        "normalized_eps": {"type": ["number", "null"]},
+        "normalized_fcf": {"type": ["number", "null"]},
+        "normalization_notes": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "valuation": {
+      "type": "object",
+      "required": ["trailing_pe", "forward_pe", "price_to_book", "ev_to_ebitda", "fcf_yield", "peer_basis", "history_basis"],
+      "properties": {
+        "trailing_pe": {"type": ["number", "null"]},
+        "forward_pe": {"type": ["number", "null"]},
+        "price_to_book": {"type": ["number", "null"]},
+        "ev_to_ebitda": {"type": ["number", "null"]},
+        "fcf_yield": {"type": ["number", "null"]},
+        "peer_basis": {"type": "string"},
+        "history_basis": {"type": "string"}
+      }
+    },
+    "durability": {
+      "type": "object",
+      "required": ["roe", "roic", "net_debt", "interest_coverage", "share_count_change_3y", "capital_allocation", "risk_flags"],
+      "properties": {
+        "roe": {"type": ["number", "null"]},
+        "roic": {"type": ["number", "null"]},
+        "net_debt": {"type": ["number", "null"]},
+        "interest_coverage": {"type": ["number", "null"]},
+        "share_count_change_3y": {"type": ["number", "null"]},
+        "capital_allocation": {"type": "string"},
+        "risk_flags": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "expected_return": {
+      "type": "object",
+      "required": ["earnings_growth", "dividend", "net_buyback", "multiple_change", "fx", "costs_and_tax", "bear", "base", "bull"],
+      "properties": {
+        "earnings_growth": {"type": ["number", "null"]},
+        "dividend": {"type": ["number", "null"]},
+        "net_buyback": {"type": ["number", "null"]},
+        "multiple_change": {"type": ["number", "null"]},
+        "fx": {"type": ["number", "null"]},
+        "costs_and_tax": {"type": ["number", "null"]},
+        "bear": {"type": ["number", "null"]},
+        "base": {"type": ["number", "null"]},
+        "bull": {"type": ["number", "null"]}
+      }
+    },
+    "score": {"type": "number", "minimum": 0, "maximum": 100},
+    "ranking_eligibility": {"enum": ["core_eligible", "satellite_only", "watch_only", "excluded"]},
+    "invalidation_conditions": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+    "evidence_ids": {"type": "array", "items": {"type": "string"}}
+  }
+}
+

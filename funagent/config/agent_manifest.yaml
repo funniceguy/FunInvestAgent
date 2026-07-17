@@ -66,6 +66,13 @@ skill_catalog:
         - "주식 단타와 가치투자 혼합 전략 수립"
         - "현재 시점 주식 행동과 자금 배분 리포트"
         - "기존 주식 전략 성과 검토와 재수정"
+    - id: "crypto_strategy_orchestrator"
+      file: "../skills/crypto/crypto_orchestrator.md"
+      registry: "../skills/crypto/crypto_skill_composition_registry.yaml"
+      use_for:
+        - "코인 현물 적립·전술 전략과 손실예산 수립"
+        - "스테이블코인·스테이킹·렌딩·DeFi 위험 검증"
+        - "보관·거래상대방·청산·디페그와 과거 예측 복기"
   stock_subskills:
     - "stock_intake_scope"
     - "stock_data_collection"
@@ -100,5 +107,7 @@ quality_gates:
   - "stock_strategy_review_defined"
   - "investor_psychology_gate_passed"
   - "leverage_risk_gate_passed"
+  - "crypto_capital_survival_gate_passed"
+  - "crypto_custody_counterparty_gate_passed"
   - "verification_score_passed"
   - "report_validated"

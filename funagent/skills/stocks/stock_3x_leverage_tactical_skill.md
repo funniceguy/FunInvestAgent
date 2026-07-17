@@ -6,6 +6,8 @@
 
 ## 전제
 
+- `stock_capital_preservation_recovery_gate_skill.md`는 반드시 clear여야 하며 스트레스 청산 손실이 계좌·슬리브 한도 안에 있어야 한다.
+
 - `stock_leverage_product_risk_skill.md`를 먼저 통과한다.
 - `stock_leverage_risk_gate_skill.md` 판정이 `allowed` 또는 `conditional_allowed`여야 한다.
 - `stock_aggressive_short_term_probability_skill.md` 판정이 `aggressive_allowed` 또는 `tactical_allowed`여야 한다.
@@ -43,6 +45,7 @@
 - 횡보 고변동 구간에서 방향을 예측.
 - 손절 대신 물타기.
 - 손실 복구 목적 재진입.
+- 자본보전 게이트가 conditional/watch_only/blocked이거나 손절 체결 갭을 포함한 손실예산이 불명확함.
 
 ## 출력
 

@@ -23,3 +23,15 @@
 ## 주식 특화 라우팅
 
 주식 요청이 단타, 가치투자, 자금 배분, 성과 검토를 포함하면 `funagent/skills/stocks/stock_orchestrator.md`를 사용한다.
+
+## 채권 특화 라우팅
+
+국채, 회사채, 채권 ETF·펀드, 듀레이션, 만기 사다리, 주식·채권 통합 요청은 `funagent/skills/bonds/bond_orchestrator.md`를 사용한다. 범용 채권 메모만으로 상품 편입을 확정하지 않는다.
+
+## 현금성·예적금 특화 라우팅
+
+파킹, 정기예금·적금, CMA·MMF·RP, 비상금, 대기자금 또는 예금-채권 비교는 `funagent/skills/cash/cash_deposit_orchestrator.md`를 사용한다. 표시 최고금리만으로 순위를 확정하지 않는다.
+
+## 통합 라우팅
+
+둘 이상의 자산군, 장기 재무 전략, 생활비·은퇴 현금흐름 요청은 `funagent/skills/financial_strategy_orchestrator.md`를 최상위 라우터로 사용한다.

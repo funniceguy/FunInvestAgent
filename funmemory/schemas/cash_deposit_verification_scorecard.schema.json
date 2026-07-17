@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "cash_deposit_verification_scorecard.schema.json",
+  "title": "Cash Deposit Verification Scorecard",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["verify_round", "categories", "weighted_score", "unknown_count", "critical_blockers", "procedure_score", "realized_performance", "decision", "repairs"],
+  "properties": {
+    "verify_round": {"type": "integer", "minimum": 1, "maximum": 3},
+    "categories": {
+      "type": "array",
+      "minItems": 9,
+      "items": {
+        "type": "object",
+        "required": ["id", "score", "minimum", "weight", "status", "evidence_ids"],
+        "properties": {
+          "id": {"enum": ["goal_horizon_cash_need", "official_source_product_freshness", "protection_institution_aggregation", "rate_limit_conditions", "after_tax_cashflow_irr", "liquidity_early_termination", "bond_substitution_comparison", "reinvestment_inflation_integration", "expression_safety"]},
+          "score": {"type": "number", "minimum": 0, "maximum": 100},
+          "minimum": {"type": "number", "minimum": 0, "maximum": 100},
+          "weight": {"type": "number", "minimum": 0, "maximum": 100},
+          "status": {"enum": ["passed", "failed", "not_applicable"]},
+          "evidence_ids": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    },
+    "weighted_score": {"type": "number", "minimum": 0, "maximum": 100},
+    "unknown_count": {"type": "integer", "minimum": 0},
+    "critical_blockers": {"type": "array", "items": {"type": "string"}},
+    "procedure_score": {"type": "number", "minimum": 0, "maximum": 100},
+    "realized_performance": {"type": ["number", "null"]},
+    "decision": {"enum": ["pass", "conditional_pass", "hold", "stop"]},
+    "repairs": {"type": "array", "items": {"type": "string"}}
+  }
+}
+

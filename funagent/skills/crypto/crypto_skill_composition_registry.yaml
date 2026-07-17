@@ -1,0 +1,41 @@
+version: 1
+orchestrator:
+  id: "crypto_strategy_orchestrator"
+  file: "crypto_orchestrator.md"
+external_prerequisites:
+  - id: "financial_health_liquidity_gate"
+    file: "../financial/financial_health_liquidity_gate_skill.md"
+  - id: "cash_deposit_orchestrator"
+    file: "../cash/cash_deposit_orchestrator.md"
+skills:
+  - id: "crypto_intake_capital_survival_gate"
+    file: "crypto_intake_capital_survival_gate_skill.md"
+  - id: "crypto_source_search_evidence"
+    file: "crypto_source_search_evidence_skill.md"
+  - id: "crypto_market_regime_flow"
+    file: "crypto_market_regime_flow_skill.md"
+  - id: "crypto_asset_protocol_due_diligence"
+    file: "crypto_asset_protocol_due_diligence_skill.md"
+  - id: "crypto_custody_counterparty_stablecoin_gate"
+    file: "crypto_custody_counterparty_stablecoin_gate_skill.md"
+  - id: "crypto_yield_staking_defi_gate"
+    file: "crypto_yield_staking_defi_gate_skill.md"
+  - id: "crypto_portfolio_execution"
+    file: "crypto_portfolio_execution_skill.md"
+  - id: "crypto_forecast_learning_loop"
+    file: "crypto_forecast_learning_loop_skill.md"
+  - id: "crypto_verification_contract"
+    file: "crypto_verification_contract_skill.md"
+assemblies:
+  - id: "crypto_long_term_core_dca"
+    sequence: ["crypto_intake_capital_survival_gate", "crypto_source_search_evidence", "crypto_market_regime_flow", "crypto_asset_protocol_due_diligence", "crypto_custody_counterparty_stablecoin_gate", "crypto_portfolio_execution", "crypto_forecast_learning_loop", "crypto_verification_contract"]
+  - id: "crypto_spot_tactical"
+    sequence: ["crypto_intake_capital_survival_gate", "crypto_source_search_evidence", "crypto_market_regime_flow", "crypto_asset_protocol_due_diligence", "crypto_custody_counterparty_stablecoin_gate", "crypto_portfolio_execution", "crypto_forecast_learning_loop", "crypto_verification_contract"]
+  - id: "crypto_yield_review"
+    sequence: ["crypto_intake_capital_survival_gate", "crypto_source_search_evidence", "crypto_market_regime_flow", "crypto_asset_protocol_due_diligence", "crypto_custody_counterparty_stablecoin_gate", "crypto_yield_staking_defi_gate", "crypto_portfolio_execution", "crypto_forecast_learning_loop", "crypto_verification_contract"]
+  - id: "stablecoin_parking_review"
+    sequence: ["crypto_intake_capital_survival_gate", "crypto_source_search_evidence", "crypto_custody_counterparty_stablecoin_gate", "crypto_yield_staking_defi_gate", "crypto_portfolio_execution", "crypto_verification_contract"]
+  - id: "crypto_derivatives_hedge"
+    sequence: ["crypto_intake_capital_survival_gate", "crypto_source_search_evidence", "crypto_market_regime_flow", "crypto_custody_counterparty_stablecoin_gate", "crypto_portfolio_execution", "crypto_forecast_learning_loop", "crypto_verification_contract"]
+  - id: "crypto_review_rebuild"
+    sequence: ["crypto_intake_capital_survival_gate", "crypto_source_search_evidence", "crypto_market_regime_flow", "crypto_asset_protocol_due_diligence", "crypto_custody_counterparty_stablecoin_gate", "crypto_yield_staking_defi_gate", "crypto_forecast_learning_loop", "crypto_portfolio_execution", "crypto_verification_contract"]

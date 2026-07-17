@@ -1,0 +1,46 @@
+version: 1
+skills:
+  - id: "cash_deposit_source_search"
+    file: "cash_deposit_source_search_skill.md"
+    output_object: "cash_deposit_source_coverage"
+  - id: "cash_deposit_product_normalization"
+    file: "cash_deposit_product_normalization_skill.md"
+    output_object: "cash_deposit_products"
+  - id: "cash_deposit_bond_substitution_gate"
+    file: "cash_deposit_bond_substitution_gate_skill.md"
+    output_object: "cash_bond_comparison_gate"
+  - id: "cash_deposit_verification_contract"
+    file: "cash_deposit_verification_contract_skill.md"
+    output_object: "cash_deposit_verification_scorecard"
+assemblies:
+  - id: "short_term_cash_reserve"
+    sequence:
+      - "cash_deposit_source_search"
+      - "cash_deposit_product_normalization"
+      - "cash_deposit_bond_substitution_gate"
+      - "cash_deposit_verification_contract"
+  - id: "deposit_ladder"
+    sequence:
+      - "cash_deposit_source_search"
+      - "cash_deposit_product_normalization"
+      - "cash_deposit_bond_substitution_gate"
+      - "cash_deposit_verification_contract"
+  - id: "installment_savings_goal"
+    sequence:
+      - "cash_deposit_source_search"
+      - "cash_deposit_product_normalization"
+      - "cash_deposit_bond_substitution_gate"
+      - "cash_deposit_verification_contract"
+  - id: "cash_bond_substitution"
+    sequence:
+      - "cash_deposit_source_search"
+      - "cash_deposit_product_normalization"
+      - "cash_deposit_bond_substitution_gate"
+      - "cash_deposit_verification_contract"
+  - id: "cash_deposit_review"
+    sequence:
+      - "cash_deposit_source_search"
+      - "cash_deposit_product_normalization"
+      - "cash_deposit_bond_substitution_gate"
+      - "cash_deposit_verification_contract"
+

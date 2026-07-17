@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "stock_covered_call_income_gate.schema.json",
+  "title": "Stock Covered Call Income Gate",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["display_name", "symbol", "product_type", "data_as_of", "option_structure", "distribution_metrics", "nav_and_total_return", "costs", "score", "gate", "blockers"],
+  "properties": {
+    "display_name": {"type": "string", "minLength": 1},
+    "symbol": {"type": "string", "minLength": 1},
+    "product_type": {"enum": ["covered_call_etf", "dividend_etf", "dividend_stock", "reit", "income_fund"]},
+    "data_as_of": {"type": "string", "minLength": 1},
+    "option_structure": {
+      "type": ["object", "null"],
+      "properties": {
+        "underlying": {"type": ["string", "null"]},
+        "option_underlying": {"type": ["string", "null"]},
+        "coverage_ratio": {"type": ["number", "null"]},
+        "moneyness": {"type": ["string", "null"]},
+        "tenor": {"type": ["string", "null"]},
+        "roll_schedule": {"type": ["string", "null"]}
+      }
+    },
+    "distribution_metrics": {
+      "type": "object",
+      "required": ["distribution_rate", "trailing_distribution_rate", "sec_yield", "return_of_capital_share", "source_breakdown_status"],
+      "properties": {
+        "distribution_rate": {"type": ["number", "null"]},
+        "trailing_distribution_rate": {"type": ["number", "null"]},
+        "sec_yield": {"type": ["number", "null"]},
+        "return_of_capital_share": {"type": ["number", "null"], "minimum": 0, "maximum": 100},
+        "source_breakdown_status": {"enum": ["verified", "estimated", "unknown"]}
+      }
+    },
+    "nav_and_total_return": {
+      "type": "object",
+      "required": ["nav_change_12m", "total_return_12m", "benchmark_total_return_12m", "upside_capture", "downside_capture"],
+      "properties": {
+        "nav_change_12m": {"type": ["number", "null"]},
+        "total_return_12m": {"type": ["number", "null"]},
+        "benchmark_total_return_12m": {"type": ["number", "null"]},
+        "upside_capture": {"type": ["number", "null"]},
+        "downside_capture": {"type": ["number", "null"]}
+      }
+    },
+    "costs": {
+      "type": "object",
+      "required": ["expense_ratio", "spread", "premium_discount", "tax_notes", "fx_notes"],
+      "properties": {
+        "expense_ratio": {"type": ["number", "null"]},
+        "spread": {"type": ["number", "null"]},
+        "premium_discount": {"type": ["number", "null"]},
+        "tax_notes": {"type": "string"},
+        "fx_notes": {"type": "string"}
+      }
+    },
+    "score": {"type": "number", "minimum": 0, "maximum": 100},
+    "gate": {"enum": ["income_satellite", "watch_only", "blocked"]},
+    "blockers": {"type": "array", "items": {"type": "string"}},
+    "evidence_ids": {"type": "array", "items": {"type": "string"}}
+  }
+}
+

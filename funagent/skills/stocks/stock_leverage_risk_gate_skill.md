@@ -4,6 +4,13 @@
 
 3배 레버리지 단타 전략을 실행 후보로 올리기 전에 구조, 시장, 심리, 실행, 손실 한도를 0-10점으로 평가한다.
 
+## 상위 수급 제한
+
+- `stock_capital_preservation_recovery_gate_skill.md`가 clear여야 하며 갭·청산 스트레스 손실이 손실예산 안에 있어야 한다.
+- 기초자산과 레버리지 상품 모두 `stock_supply_overhang_order_flow_skill.md`를 통과해야 한다.
+- 기초자산이 급등 exhaustion, 순환 mature_rotation, distribution_markdown이면 레버리지 신규 진입을 금지한다.
+- 레버리지 상품의 LP 호가, NAV/IOPV, 괴리율, 복수 depth가 unknown이면 점수와 무관하게 `blocked`다.
+
 ## 평가 항목
 
 각 항목은 0-10점으로 평가한다. 8점 미만 항목이 하나라도 있으면 `allowed`가 될 수 없다.
@@ -37,6 +44,7 @@
 - 비상금, 확정 지출, 대출 자금 사용.
 - 오버나이트인데 갭 손실 계획 없음.
 - 마진, 미수, 신용거래와 결합.
+- 자본보전 게이트가 watch_only 또는 blocked이거나 스트레스 청산 손실이 계좌 한도를 초과.
 
 ## 출력
 
@@ -46,4 +54,3 @@
 - 최종 판정.
 - 허용 행동.
 - 보완 조건.
-

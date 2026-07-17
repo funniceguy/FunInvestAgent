@@ -8,7 +8,10 @@
     "created_at",
     "base_currency",
     "scope",
+    "capital_preservation_recovery_gate",
+    "cash_deposit_bond_comparison",
     "market_regime",
+    "cross_market_outcome_audit",
     "product_quote_packet",
     "psychology_gate",
     "capital_allocation",
@@ -52,7 +55,18 @@
               "short_term",
               "aggressive_short_term",
               "forward_outlook",
-              "value_investing"
+              "cross_market_outcome_audit",
+              "forecast_learning_loop",
+              "predictive_calibration",
+              "failure_postmortem",
+              "macro_causal_matrix",
+              "market_integrity_causal_attribution",
+              "supply_overhang_order_flow",
+              "momentum_rotation_cycle",
+              "value_investing",
+              "long_term_total_return",
+              "covered_call_income",
+              "cash_deposit_substitution"
             ]
           }
         },
@@ -74,11 +88,313 @@
         "unknown"
       ]
     },
+    "market_integrity_causal_attribution": {
+      "$ref": "stock_market_integrity_causal_attribution.schema.json"
+    },
+    "capital_preservation_recovery_gate": {
+      "$ref": "stock_capital_preservation_recovery_gate.schema.json"
+    },
+    "cash_deposit_bond_comparison": {
+      "$ref": "cash_deposit_bond_comparison.schema.json"
+    },
     "psychology_gate": {
       "$ref": "https://funinvestagent.local/schemas/stock_psychology_gate.schema.json"
     },
     "leverage_risk_gate": {
       "$ref": "https://funinvestagent.local/schemas/stock_leverage_risk_gate.schema.json"
+    },
+    "cross_market_outcome_audit": {
+      "$ref": "https://funinvestagent.local/schemas/stock_cross_market_outcome_audit.schema.json"
+    },
+    "supply_overhang_order_flow": {
+      "type": "array",
+      "items": {
+        "$ref": "https://funinvestagent.local/schemas/stock_supply_overhang_order_flow.schema.json"
+      }
+    },
+    "momentum_rotation_cycles": {
+      "type": "array",
+      "items": {
+        "$ref": "https://funinvestagent.local/schemas/stock_momentum_rotation_cycle.schema.json"
+      }
+    },
+    "forecast_learning_loop": {
+      "type": "object",
+      "required": [
+        "applied",
+        "decision",
+        "lookback_start",
+        "lookback_end",
+        "prior_report_count",
+        "prediction_count",
+        "success_count",
+        "failure_count",
+        "unknown_count",
+        "score_adjustments"
+      ],
+      "properties": {
+        "applied": {
+          "type": "boolean"
+        },
+        "decision": {
+          "type": "string",
+          "enum": [
+            "calibrated",
+            "conditional",
+            "insufficient_sample",
+            "blocked",
+            "not_applicable"
+          ]
+        },
+        "lookback_start": {
+          "type": "string",
+          "format": "date"
+        },
+        "lookback_end": {
+          "type": "string",
+          "format": "date"
+        },
+        "prior_report_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "prediction_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "success_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "partial_success_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "failure_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unknown_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "reviewed_reports": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "path",
+              "report_date"
+            ],
+            "properties": {
+              "path": {
+                "type": "string"
+              },
+              "report_date": {
+                "type": "string"
+              },
+              "prediction_count": {
+                "type": "integer",
+                "minimum": 0
+              }
+            }
+          }
+        },
+        "reviewed_predictions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "prediction_id",
+              "target",
+              "classification"
+            ],
+            "properties": {
+              "prediction_id": {
+                "type": "string"
+              },
+              "target": {
+                "type": "string"
+              },
+              "source_report": {
+                "type": "string"
+              },
+              "expected_direction": {
+                "type": "string"
+              },
+              "actual_outcome": {
+                "type": "string"
+              },
+              "classification": {
+                "type": "string",
+                "enum": [
+                  "success",
+                  "partial_success",
+                  "failure",
+                  "unknown"
+                ]
+              },
+              "root_cause": {
+                "type": "string"
+              },
+              "rule_change": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "recurring_failure_modes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "data_staleness",
+              "expectation_misread",
+              "hidden_expectation_gap",
+              "flow_misread",
+              "fx_rate_mismatch",
+              "macro_policy_misread",
+              "event_timing_error",
+              "intraday_timing_error",
+              "psychology_error",
+              "execution_error",
+              "random_outcome"
+            ]
+          }
+        },
+        "retained_success_rules": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "score_adjustments": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "category",
+              "previous_minimum_score",
+              "adjusted_minimum_score",
+              "reason"
+            ],
+            "properties": {
+              "category": {
+                "type": "string"
+              },
+              "previous_minimum_score": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 100
+              },
+              "adjusted_minimum_score": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 100
+              },
+              "reason": {
+                "type": "string"
+              },
+              "applies_for_next_strategy_count": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 3
+              }
+            }
+          }
+        },
+        "applied_to_current_strategy": {
+          "type": "boolean"
+        },
+        "critical_blockers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "forecast_failure_postmortem": {
+      "type": "object",
+      "required": [
+        "applied",
+        "decision",
+        "severity",
+        "root_causes",
+        "rule_changes"
+      ],
+      "properties": {
+        "applied": {
+          "type": "boolean"
+        },
+        "decision": {
+          "type": "string",
+          "enum": [
+            "proceed_possible",
+            "conditional_review",
+            "defer",
+            "stop_recommended",
+            "not_applicable"
+          ]
+        },
+        "severity": {
+          "type": "string",
+          "enum": [
+            "minor",
+            "moderate",
+            "severe",
+            "critical",
+            "not_applicable"
+          ]
+        },
+        "previous_strategy_id": {
+          "type": "string"
+        },
+        "actual_outcome_summary": {
+          "type": "string"
+        },
+        "first_warning_signal": {
+          "type": "string"
+        },
+        "missed_leading_indicators": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "root_causes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "cause",
+              "score"
+            ],
+            "properties": {
+              "cause": {
+                "type": "string"
+              },
+              "score": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 10
+              },
+              "evidence": {
+                "type": "string"
+              },
+              "new_rule": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "rule_changes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     },
     "forward_outlook_research": {
       "type": "object",
@@ -203,6 +519,179 @@
         }
       }
     },
+    "predictive_calibration": {
+      "type": "object",
+      "required": [
+        "applied",
+        "horizon",
+        "decision",
+        "score",
+        "predictions",
+        "critical_blockers"
+      ],
+      "properties": {
+        "applied": {
+          "type": "boolean"
+        },
+        "horizon": {
+          "type": "string",
+          "enum": [
+            "intraday",
+            "next_day",
+            "next_week",
+            "1_month",
+            "unknown"
+          ]
+        },
+        "checked_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "decision": {
+          "type": "string",
+          "enum": [
+            "prediction_usable",
+            "conditional_prediction",
+            "watch_only",
+            "prediction_blocked",
+            "not_applicable"
+          ]
+        },
+        "score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "data_points": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "data_as_of",
+              "source_id",
+              "direction_contribution"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "latest_value": {
+                "type": [
+                  "number",
+                  "string"
+                ]
+              },
+              "one_day_change": {
+                "type": [
+                  "number",
+                  "string"
+                ]
+              },
+              "three_day_change": {
+                "type": [
+                  "number",
+                  "string"
+                ]
+              },
+              "data_as_of": {
+                "type": "string"
+              },
+              "source_id": {
+                "type": "string"
+              },
+              "direction_contribution": {
+                "type": "string",
+                "enum": [
+                  "up",
+                  "range",
+                  "down",
+                  "mixed",
+                  "neutral"
+                ]
+              },
+              "confidence": {
+                "type": "string",
+                "enum": [
+                  "high",
+                  "medium",
+                  "low",
+                  "unknown"
+                ]
+              }
+            }
+          }
+        },
+        "predictions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "prediction_id",
+              "target",
+              "up_probability",
+              "range_probability",
+              "down_probability",
+              "verification_time",
+              "actual_judgement_basis"
+            ],
+            "properties": {
+              "prediction_id": {
+                "type": "string"
+              },
+              "target": {
+                "type": "string"
+              },
+              "up_probability": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 100
+              },
+              "range_probability": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 100
+              },
+              "down_probability": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 100
+              },
+              "expected_range": {
+                "type": "string"
+              },
+              "supporting_data": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "conflicting_data": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "verification_time": {
+                "type": "string"
+              },
+              "actual_judgement_basis": {
+                "type": "string"
+              },
+              "error_calculation": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "critical_blockers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "product_quote_packet": {
       "type": "object",
       "required": [
@@ -228,6 +717,7 @@
           "items": {
             "type": "object",
             "required": [
+              "display_name",
               "product_name",
               "symbol",
               "exchange",
@@ -239,6 +729,10 @@
               "execution_decision"
             ],
             "properties": {
+              "display_name": {
+                "type": "string",
+                "description": "Human-readable security display name, e.g. 한글명/Official Full Name (TICKER)."
+              },
               "product_name": {
                 "type": "string"
               },
@@ -346,6 +840,107 @@
         }
       }
     },
+    "macro_causal_factor_matrix": {
+      "type": "object",
+      "required": [
+        "applied",
+        "decision",
+        "candidates"
+      ],
+      "properties": {
+        "applied": {
+          "type": "boolean"
+        },
+        "checked_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "decision": {
+          "type": "string",
+          "enum": [
+            "efficiency_leader",
+            "efficient_tactical",
+            "watch_only",
+            "blocked",
+            "not_applicable"
+          ]
+        },
+        "candidates": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "display_name",
+              "symbol",
+              "efficiency_score",
+              "decision"
+            ],
+            "properties": {
+              "display_name": {
+                "type": "string",
+                "description": "Human-readable candidate display name, e.g. 한글명/Official Full Name (TICKER)."
+              },
+              "symbol": {
+                "type": "string"
+              },
+              "factor_sensitivity": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "number",
+                  "minimum": -5,
+                  "maximum": 5
+                }
+              },
+              "strong_tailwind_count": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "strong_headwind_count": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "efficiency_score": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 100
+              },
+              "decision": {
+                "type": "string",
+                "enum": [
+                  "efficiency_leader",
+                  "efficient_tactical",
+                  "watch_only",
+                  "blocked"
+                ]
+              },
+              "suitable_strategy": {
+                "type": "string",
+                "enum": [
+                  "short_term",
+                  "swing",
+                  "value_investing",
+                  "defensive",
+                  "excluded",
+                  "unknown"
+                ]
+              },
+              "invalidation_conditions": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "critical_blockers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "quality_value_screening": {
       "type": "object",
       "required": [
@@ -374,6 +969,7 @@
           "items": {
             "type": "object",
             "required": [
+              "display_name",
               "symbol",
               "decision",
               "score",
@@ -382,6 +978,10 @@
               "value_trap_flag"
             ],
             "properties": {
+              "display_name": {
+                "type": "string",
+                "description": "Human-readable candidate display name, e.g. 한글명/Official Full Name (TICKER)."
+              },
               "symbol": {
                 "type": "string"
               },
@@ -722,6 +1322,7 @@
       "items": {
         "type": "object",
         "required": [
+          "display_name",
           "symbol",
           "thesis",
           "entry_condition",
@@ -730,6 +1331,10 @@
           "max_position_percent"
         ],
         "properties": {
+          "display_name": {
+            "type": "string",
+            "description": "Human-readable trade candidate display name, e.g. 한글명/Official Full Name (TICKER)."
+          },
           "symbol": {
             "type": "string"
           },
@@ -758,6 +1363,7 @@
       "items": {
         "type": "object",
         "required": [
+          "display_name",
           "symbol",
           "thesis",
           "valuation_basis",
@@ -766,6 +1372,10 @@
           "target_weight_percent"
         ],
         "properties": {
+          "display_name": {
+            "type": "string",
+            "description": "Human-readable investment candidate display name, e.g. 한글명/Official Full Name (TICKER)."
+          },
           "symbol": {
             "type": "string"
           },
@@ -788,6 +1398,27 @@
           }
         }
       }
+    },
+    "long_term_return_target_gate": {
+      "$ref": "stock_long_term_return_target_gate.schema.json"
+    },
+    "long_term_valuation_durability": {
+      "type": "array",
+      "items": {
+        "$ref": "stock_long_term_valuation_durability.schema.json"
+      }
+    },
+    "covered_call_income_gate": {
+      "type": "array",
+      "items": {
+        "$ref": "stock_covered_call_income_gate.schema.json"
+      }
+    },
+    "long_term_portfolio_strategy": {
+      "$ref": "stock_long_term_portfolio_strategy.schema.json"
+    },
+    "long_term_verification_contract": {
+      "$ref": "stock_long_term_verification_scorecard.schema.json"
     },
     "risk_controls": {
       "type": "array",
@@ -820,7 +1451,9 @@
               "weekly",
               "monthly",
               "earnings",
-              "quarterly"
+              "quarterly",
+              "semiannual",
+              "annual"
             ]
           },
           "due_date": {
@@ -830,5 +1463,27 @@
         }
       }
     }
-  }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "scope": {
+            "properties": {
+              "strategy_modes": {
+                "contains": {
+                  "const": "market_integrity_causal_attribution"
+                }
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "market_integrity_causal_attribution"
+        ]
+      }
+    }
+  ]
 }

@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "crypto_strategy_plan.schema.json",
+  "title": "Crypto Strategy Plan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["strategy_id", "generated_at", "data_as_of", "assembly", "investor_unknowns", "risk_gate", "evidence_cards", "regime_probabilities", "candidates", "portfolio_rules", "scenarios", "verification"],
+  "properties": {
+    "strategy_id": {"type": "string", "minLength": 1},
+    "generated_at": {"type": "string", "format": "date-time"},
+    "data_as_of": {"type": "string", "format": "date-time"},
+    "assembly": {"enum": ["crypto_long_term_core_dca", "crypto_spot_tactical", "crypto_yield_review", "stablecoin_parking_review", "crypto_derivatives_hedge", "crypto_review_rebuild"]},
+    "investor_unknowns": {"type": "array", "items": {"type": "string"}},
+    "risk_gate": {"$ref": "crypto_risk_gate.schema.json"},
+    "evidence_cards": {"type": "array", "items": {"$ref": "crypto_evidence_card.schema.json"}},
+    "regime_probabilities": {
+      "type": "object",
+      "required": ["accumulation", "trend_expansion", "leveraged_overheat", "distribution", "deleveraging", "capitulation", "range_uncertain"],
+      "properties": {
+        "accumulation": {"type": "number", "minimum": 0, "maximum": 1},
+        "trend_expansion": {"type": "number", "minimum": 0, "maximum": 1},
+        "leveraged_overheat": {"type": "number", "minimum": 0, "maximum": 1},
+        "distribution": {"type": "number", "minimum": 0, "maximum": 1},
+        "deleveraging": {"type": "number", "minimum": 0, "maximum": 1},
+        "capitulation": {"type": "number", "minimum": 0, "maximum": 1},
+        "range_uncertain": {"type": "number", "minimum": 0, "maximum": 1}
+      }
+    },
+    "candidates": {"type": "array", "items": {"type": "object", "required": ["display_name", "risk_signal_count", "ranking_eligible", "decision"], "properties": {"display_name": {"type": "string"}, "risk_signal_count": {"type": "integer", "minimum": 0, "maximum": 8}, "ranking_eligible": {"type": "boolean"}, "decision": {"enum": ["eligible", "watch", "excluded"]}}}},
+    "portfolio_rules": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "scenarios": {"type": "array", "minItems": 3, "items": {"type": "object", "required": ["name", "probability", "trigger", "invalidation", "action"], "properties": {"name": {"enum": ["bear", "base", "bull"]}, "probability": {"type": "number", "minimum": 0, "maximum": 1}, "trigger": {"type": "string"}, "invalidation": {"type": "string"}, "action": {"type": "string"}}}},
+    "verification": {"$ref": "crypto_verification_scorecard.schema.json"}
+  }
+}
+

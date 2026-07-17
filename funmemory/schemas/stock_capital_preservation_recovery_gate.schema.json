@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "stock_capital_preservation_recovery_gate.schema.json",
+  "title": "Stock Capital Preservation and Recovery Gate",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "strategy_horizon",
+    "guarantee_status",
+    "capital_buckets",
+    "loss_budgets",
+    "stress_loss",
+    "drawdown_recovery",
+    "recovery_quality",
+    "after_cost_expected_value",
+    "score",
+    "gate",
+    "critical_blockers"
+  ],
+  "properties": {
+    "strategy_horizon": {"enum": ["intraday", "short_term", "swing", "long_term", "income", "mixed"]},
+    "guarantee_status": {"enum": ["not_available_for_market_risk", "guarantee_claim_blocked"]},
+    "capital_buckets": {
+      "type": "object",
+      "required": ["excluded_capital", "risk_capital", "liquidity_horizon"],
+      "properties": {
+        "excluded_capital": {"type": ["number", "null"]},
+        "risk_capital": {"type": ["number", "null"]},
+        "liquidity_horizon": {"type": ["string", "null"]}
+      }
+    },
+    "loss_budgets": {
+      "type": "object",
+      "required": ["per_trade", "daily", "weekly", "sleeve", "portfolio"],
+      "properties": {
+        "per_trade": {"type": ["number", "null"], "minimum": 0},
+        "daily": {"type": ["number", "null"], "minimum": 0},
+        "weekly": {"type": ["number", "null"], "minimum": 0},
+        "sleeve": {"type": ["number", "null"], "minimum": 0},
+        "portfolio": {"type": ["number", "null"], "minimum": 0}
+      }
+    },
+    "stress_loss": {
+      "type": "object",
+      "required": ["planned_stop_loss", "gap_slippage_loss", "correlation_stress_loss", "effective_risk_loss", "within_budget"],
+      "properties": {
+        "planned_stop_loss": {"type": ["number", "null"]},
+        "gap_slippage_loss": {"type": ["number", "null"]},
+        "correlation_stress_loss": {"type": ["number", "null"]},
+        "effective_risk_loss": {"type": ["number", "null"]},
+        "within_budget": {"type": "boolean"}
+      }
+    },
+    "position_size_cap": {"type": ["number", "null"], "minimum": 0},
+    "drawdown_recovery": {
+      "type": "object",
+      "required": ["drawdown_percent", "required_gain_percent", "bear_years", "base_years", "bull_years"],
+      "properties": {
+        "drawdown_percent": {"type": ["number", "null"], "minimum": 0, "exclusiveMaximum": 100},
+        "required_gain_percent": {"type": ["number", "null"], "minimum": 0},
+        "bear_years": {"type": ["number", "null"], "minimum": 0},
+        "base_years": {"type": ["number", "null"], "minimum": 0},
+        "bull_years": {"type": ["number", "null"], "minimum": 0}
+      }
+    },
+    "recovery_quality": {"enum": ["high_quality_recovery", "conditional_recovery", "low_quality_recovery", "structural_impairment", "unknown"]},
+    "recovery_evidence": {"type": "array", "items": {"type": "string"}},
+    "after_cost_expected_value": {"type": ["number", "null"]},
+    "score": {"type": "number", "minimum": 0, "maximum": 100},
+    "gate": {"enum": ["capital_preservation_clear", "capital_preservation_conditional", "capital_preservation_watch_only", "capital_preservation_blocked"]},
+    "critical_blockers": {"type": "array", "items": {"type": "string"}},
+    "evidence_ids": {"type": "array", "items": {"type": "string"}}
+  }
+}
+

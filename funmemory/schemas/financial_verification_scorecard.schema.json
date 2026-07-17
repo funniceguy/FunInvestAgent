@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "financial_verification_scorecard.schema.json",
+  "title": "Integrated Financial Verification Scorecard",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["verify_round", "categories", "weighted_score", "unknown_count", "critical_blockers", "procedure_score", "realized_performance", "lowest_subgate", "decision", "repairs"],
+  "properties": {
+    "verify_round": {"type": "integer", "minimum": 1, "maximum": 3},
+    "categories": {
+      "type": "array",
+      "minItems": 12,
+      "items": {
+        "type": "object",
+        "required": ["id", "score", "minimum", "weight", "status", "evidence_ids"],
+        "properties": {
+          "id": {"enum": ["financial_health_liquidity_debt", "goal_horizon_cashflow", "official_evidence_freshness", "cash_protection_substitution", "stock_contract", "bond_contract", "crypto_contract", "allocation_goal_buckets", "after_tax_cost_fx_real_return", "compound_stress_recovery", "operations_learning_review", "expression_safety"]},
+          "score": {"type": "number", "minimum": 0, "maximum": 100},
+          "minimum": {"type": "number", "minimum": 0, "maximum": 100},
+          "weight": {"type": "number", "minimum": 0, "maximum": 100},
+          "status": {"enum": ["passed", "failed", "not_applicable"]},
+          "evidence_ids": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    },
+    "weighted_score": {"type": "number", "minimum": 0, "maximum": 100},
+    "unknown_count": {"type": "integer", "minimum": 0},
+    "critical_blockers": {"type": "array", "items": {"type": "string"}},
+    "procedure_score": {"type": "number", "minimum": 0, "maximum": 100},
+    "realized_performance": {"type": ["number", "null"]},
+    "lowest_subgate": {"type": "string"},
+    "decision": {"enum": ["perfect_process", "release_ready", "conditional", "hold", "stop"]},
+    "repairs": {"type": "array", "items": {"type": "string"}}
+  }
+}

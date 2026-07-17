@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "stock_long_term_verification_scorecard.schema.json",
+  "title": "Stock Long-Term Verification Scorecard",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["verify_round", "categories", "weighted_score", "unknown_count", "critical_blockers", "procedure_score", "realized_performance", "decision"],
+  "properties": {
+    "verify_round": {"type": "integer", "minimum": 1, "maximum": 3},
+    "categories": {
+      "type": "array",
+      "minItems": 10,
+      "items": {
+        "type": "object",
+        "required": ["id", "score", "minimum", "weight", "evidence_ids", "passed"],
+        "properties": {
+          "id": {
+            "enum": [
+              "goal_cashflow_horizon_suitability",
+              "return_target_feasibility",
+              "data_disclosure_freshness",
+              "valuation_business_durability",
+              "distribution_covered_call_quality",
+              "portfolio_diversification_correlation",
+              "after_cost_tax_fx_return",
+              "stress_downside_recovery",
+              "operations_rebalancing_review",
+              "expression_safety"
+            ]
+          },
+          "score": {"type": "number", "minimum": 0, "maximum": 100},
+          "minimum": {"type": "number", "minimum": 0, "maximum": 100},
+          "weight": {"type": "number", "minimum": 0, "maximum": 100},
+          "evidence_ids": {"type": "array", "items": {"type": "string"}},
+          "passed": {"type": "boolean"}
+        }
+      }
+    },
+    "weighted_score": {"type": "number", "minimum": 0, "maximum": 100},
+    "unknown_count": {"type": "integer", "minimum": 0},
+    "critical_blockers": {"type": "array", "items": {"type": "string"}},
+    "procedure_score": {"type": "number", "minimum": 0, "maximum": 100},
+    "realized_performance": {"type": ["number", "null"]},
+    "decision": {"enum": ["pass", "conditional_pass", "hold", "stop"]},
+    "repairs": {"type": "array", "items": {"type": "string"}}
+  }
+}

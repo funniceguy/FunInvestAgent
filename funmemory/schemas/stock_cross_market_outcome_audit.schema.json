@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://funinvestagent.local/schemas/stock_cross_market_outcome_audit.schema.json",
+  "title": "StockCrossMarketOutcomeAudit",
+  "type": "object",
+  "required": [
+    "applied",
+    "decision",
+    "artifact_count",
+    "unique_prediction_count",
+    "machine_scored_count",
+    "legacy_unscorable_count",
+    "matured_unscored_count",
+    "sample_status",
+    "critical_blockers"
+  ],
+  "properties": {
+    "applied": {"type": "boolean"},
+    "checked_at": {"type": "string", "format": "date-time"},
+    "decision": {"type": "string", "enum": ["audit_clear", "audit_provisional", "audit_conditional", "audit_blocked"]},
+    "artifact_count": {"type": "integer", "minimum": 0},
+    "unique_prediction_count": {"type": "integer", "minimum": 0},
+    "machine_scored_count": {"type": "integer", "minimum": 0},
+    "legacy_unscorable_count": {"type": "integer", "minimum": 0},
+    "matured_unscored_count": {"type": "integer", "minimum": 0},
+    "matured_unscored_percent": {"type": "number", "minimum": 0, "maximum": 100},
+    "sample_status": {"type": "string", "enum": ["insufficient_sample", "provisional", "promotion_eligible"]},
+    "market_horizon_buckets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["market", "horizon", "matured_count", "scored_count", "sample_status"],
+        "properties": {
+          "market": {"type": "string", "enum": ["KR", "US"]},
+          "horizon": {"type": "string", "enum": ["intraday", "next_day", "next_week", "swing", "long_term"]},
+          "regime": {"type": "string"},
+          "cycle_class": {"type": "string"},
+          "matured_count": {"type": "integer", "minimum": 0},
+          "scored_count": {"type": "integer", "minimum": 0},
+          "direction_hit_rate_percent": {"type": ["number", "null"], "minimum": 0, "maximum": 100},
+          "multiclass_brier_score": {"type": ["number", "null"], "minimum": 0, "maximum": 2},
+          "range_coverage_percent": {"type": ["number", "null"], "minimum": 0, "maximum": 100},
+          "after_cost_expectancy_percent": {"type": ["number", "null"]},
+          "sample_status": {"type": "string", "enum": ["insufficient_sample", "provisional", "promotion_eligible"]}
+        }
+      }
+    },
+    "recurring_success_rules": {"type": "array", "items": {"type": "string"}},
+    "recurring_failure_modes": {"type": "array", "items": {"type": "string"}},
+    "score_adjustments": {"type": "array", "items": {"type": "string"}},
+    "critical_blockers": {"type": "array", "items": {"type": "string"}}
+  }
+}

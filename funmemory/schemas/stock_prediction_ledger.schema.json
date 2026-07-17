@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://funinvestagent.local/schemas/stock_prediction_ledger.schema.json",
+  "title": "StockPredictionLedgerRecord",
+  "type": "object",
+  "required": [
+    "prediction_id",
+    "source_report",
+    "market",
+    "symbol",
+    "display_name",
+    "created_at",
+    "data_as_of",
+    "horizon",
+    "verification_due_at",
+    "probabilities",
+    "success_criteria",
+    "failure_criteria",
+    "status"
+  ],
+  "properties": {
+    "prediction_id": {"type": "string", "pattern": "^(KR|US)-[A-Z0-9]+-[0-9]{8}-[0-9]+$"},
+    "parent_prediction_id": {"type": ["string", "null"]},
+    "source_report": {"type": "string"},
+    "strategy_id": {"type": "string"},
+    "market": {"type": "string", "enum": ["KR", "US"]},
+    "venue": {"type": "string"},
+    "symbol": {"type": "string"},
+    "display_name": {"type": "string"},
+    "created_at": {"type": "string", "format": "date-time"},
+    "data_as_of": {"type": "string", "format": "date-time"},
+    "horizon": {"type": "string", "enum": ["intraday", "next_day", "next_week", "swing", "long_term"]},
+    "verification_due_at": {"type": "string", "format": "date-time"},
+    "scored_at": {"type": ["string", "null"], "format": "date-time"},
+    "probabilities": {
+      "type": "object",
+      "required": ["up", "flat", "down"],
+      "properties": {
+        "up": {"type": "number", "minimum": 0, "maximum": 1},
+        "flat": {"type": "number", "minimum": 0, "maximum": 1},
+        "down": {"type": "number", "minimum": 0, "maximum": 1}
+      }
+    },
+    "expected_range": {
+      "type": "object",
+      "properties": {
+        "low": {"type": "number"},
+        "high": {"type": "number"},
+        "currency": {"type": "string"}
+      }
+    },
+    "success_criteria": {"type": "string"},
+    "failure_criteria": {"type": "string"},
+    "invalidation_conditions": {"type": "array", "items": {"type": "string"}},
+    "position_action": {"type": "string", "enum": ["enter", "add", "hold", "reduce", "exit", "watch", "avoid"]},
+    "market_regime": {"type": "string"},
+    "cycle_class": {"type": "string"},
+    "supply_demand_state": {"type": "string"},
+    "source_ids": {"type": "array", "items": {"type": "string"}},
+    "missing_data": {"type": "array", "items": {"type": "string"}},
+    "actual_result": {
+      "type": "object",
+      "properties": {
+        "direction": {"type": "string", "enum": ["up", "flat", "down", "unknown"]},
+        "close": {"type": "number"},
+        "close_vs_vwap": {"type": "string"},
+        "benchmark_relative_return_percent": {"type": "number"},
+        "flow_result": {"type": "string"},
+        "fx_result": {"type": "string"}
+      }
+    },
+    "execution_result": {
+      "type": "object",
+      "properties": {
+        "order_status": {"type": "string", "enum": ["not_ordered", "unfilled", "partial_fill", "filled", "unknown"]},
+        "fill_price": {"type": "number"},
+        "slippage_bps": {"type": "number"},
+        "fees_tax_fx": {"type": "number"},
+        "mfe_percent": {"type": "number"},
+        "mae_percent": {"type": "number"},
+        "realized_return_percent": {"type": "number"},
+        "stop_followed": {"type": "boolean"}
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": ["open", "matured_unscored", "scored", "cancelled_before_market", "legacy_unscorable"]
+    },
+    "forecast_outcome": {"type": "string", "enum": ["success", "partial_success", "failure", "unknown", "not_matured"]},
+    "execution_outcome": {"type": "string", "enum": ["success", "partial_success", "failure", "not_executed", "unknown"]},
+    "risk_outcome": {"type": "string", "enum": ["compliant", "breach", "not_applicable", "unknown"]},
+    "failure_modes": {"type": "array", "items": {"type": "string"}},
+    "adjudication_notes": {"type": "string"}
+  }
+}

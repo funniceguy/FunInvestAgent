@@ -1,0 +1,37 @@
+version: 1
+orchestrator:
+  id: "financial_strategy_orchestrator"
+  file: "../financial_strategy_orchestrator.md"
+subskills:
+  - id: "financial_health_liquidity_gate"
+    file: "financial_health_liquidity_gate_skill.md"
+  - id: "financial_cross_asset_evidence_synthesis"
+    file: "financial_cross_asset_evidence_synthesis_skill.md"
+  - id: "financial_goal_bucket_design"
+    file: "financial_goal_bucket_design_skill.md"
+  - id: "financial_portfolio_scenario_stress"
+    file: "financial_portfolio_scenario_stress_skill.md"
+  - id: "financial_strategy_learning_loop"
+    file: "financial_strategy_learning_loop_skill.md"
+  - id: "financial_strategy_verification_contract"
+    file: "financial_strategy_verification_contract_skill.md"
+external_orchestrators:
+  - id: "stock_strategy_orchestrator"
+    file: "../stocks/stock_orchestrator.md"
+  - id: "bond_strategy_orchestrator"
+    file: "../bonds/bond_orchestrator.md"
+  - id: "cash_deposit_orchestrator"
+    file: "../cash/cash_deposit_orchestrator.md"
+  - id: "crypto_strategy_orchestrator"
+    file: "../crypto/crypto_orchestrator.md"
+assemblies:
+  - id: "full_financial_strategy"
+    sequence: ["financial_health_liquidity_gate", "financial_cross_asset_evidence_synthesis", "financial_goal_bucket_design", "financial_portfolio_scenario_stress", "financial_strategy_learning_loop", "financial_strategy_verification_contract"]
+  - id: "short_term_financial_stability"
+    sequence: ["financial_health_liquidity_gate", "financial_cross_asset_evidence_synthesis", "financial_goal_bucket_design", "financial_portfolio_scenario_stress", "financial_strategy_verification_contract"]
+  - id: "long_term_wealth_strategy"
+    sequence: ["financial_health_liquidity_gate", "financial_cross_asset_evidence_synthesis", "financial_goal_bucket_design", "financial_portfolio_scenario_stress", "financial_strategy_learning_loop", "financial_strategy_verification_contract"]
+  - id: "retirement_income_strategy"
+    sequence: ["financial_health_liquidity_gate", "financial_cross_asset_evidence_synthesis", "financial_goal_bucket_design", "financial_portfolio_scenario_stress", "financial_strategy_learning_loop", "financial_strategy_verification_contract"]
+  - id: "financial_review_rebuild"
+    sequence: ["financial_health_liquidity_gate", "financial_cross_asset_evidence_synthesis", "financial_strategy_learning_loop", "financial_goal_bucket_design", "financial_portfolio_scenario_stress", "financial_strategy_verification_contract"]

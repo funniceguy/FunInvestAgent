@@ -1,0 +1,391 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://funinvestagent.local/schemas/stock_market_integrity_causal_attribution.schema.json",
+  "title": "StockMarketIntegrityCausalAttributionPacket",
+  "type": "object",
+  "required": [
+    "applied",
+    "data_as_of",
+    "decision",
+    "causal_layers",
+    "institutional_flow_breakdown",
+    "program_flow",
+    "cross_market_counterfactuals",
+    "leverage_mechanics",
+    "manipulation_hypothesis",
+    "money_flow_state",
+    "strategy_constraints",
+    "source_ids",
+    "unknowns"
+  ],
+  "properties": {
+    "applied": {
+      "type": "boolean"
+    },
+    "data_as_of": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "decision": {
+      "type": "string",
+      "enum": [
+        "causal_attribution_complete",
+        "conditional_attribution",
+        "causal_attribution_unresolved",
+        "causal_attribution_blocked"
+      ]
+    },
+    "score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "causal_layers": {
+      "type": "array",
+      "minItems": 5,
+      "items": {
+        "type": "object",
+        "required": [
+          "layer",
+          "cause",
+          "evidence_level",
+          "confidence",
+          "source_ids",
+          "counterevidence"
+        ],
+        "properties": {
+          "layer": {
+            "type": "string",
+            "enum": [
+              "structural_vulnerability",
+              "trigger",
+              "amplifier",
+              "consequence",
+              "alternative_hypothesis"
+            ]
+          },
+          "cause": {
+            "type": "string",
+            "minLength": 1
+          },
+          "evidence_level": {
+            "type": "string",
+            "enum": [
+              "official_primary",
+              "market_data",
+              "trusted_secondary",
+              "inference",
+              "unverified"
+            ]
+          },
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "source_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "counterevidence": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "unknowns": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "institutional_flow_breakdown": {
+      "type": "object",
+      "required": [
+        "unit",
+        "retail",
+        "foreign_cash",
+        "institution_total",
+        "investment_trust_private_fund",
+        "pension",
+        "double_counting_warning"
+      ],
+      "properties": {
+        "unit": {
+          "type": "string"
+        },
+        "retail": {
+          "type": ["number", "null"]
+        },
+        "foreign_cash": {
+          "type": ["number", "null"]
+        },
+        "institution_total": {
+          "type": ["number", "null"]
+        },
+        "financial_investment": {
+          "type": ["number", "null"]
+        },
+        "investment_trust_private_fund": {
+          "type": ["number", "null"]
+        },
+        "insurance": {
+          "type": ["number", "null"]
+        },
+        "bank": {
+          "type": ["number", "null"]
+        },
+        "pension": {
+          "type": ["number", "null"]
+        },
+        "other": {
+          "type": ["number", "null"]
+        },
+        "double_counting_warning": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "program_flow": {
+      "type": "object",
+      "required": [
+        "unit",
+        "arbitrage",
+        "non_arbitrage",
+        "total",
+        "attribution_limit"
+      ],
+      "properties": {
+        "unit": {
+          "type": "string"
+        },
+        "arbitrage": {
+          "type": ["number", "null"]
+        },
+        "non_arbitrage": {
+          "type": ["number", "null"]
+        },
+        "total": {
+          "type": ["number", "null"]
+        },
+        "attribution_limit": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "cross_market_counterfactuals": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "comparison",
+          "observed_difference",
+          "causal_implication",
+          "source_ids"
+        ],
+        "properties": {
+          "comparison": {
+            "type": "string"
+          },
+          "observed_difference": {
+            "type": "string"
+          },
+          "causal_implication": {
+            "type": "string"
+          },
+          "source_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "adr_local_basis": {
+      "type": "object",
+      "properties": {
+        "checked": {
+          "type": "boolean"
+        },
+        "conversion_ratio": {
+          "type": ["number", "null"],
+          "exclusiveMinimum": 0
+        },
+        "fx_rate": {
+          "type": ["number", "null"],
+          "exclusiveMinimum": 0
+        },
+        "basis_percent": {
+          "type": ["number", "null"]
+        },
+        "convertibility_constraints": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "decision_use": {
+          "type": "string",
+          "enum": [
+            "price_discovery_only",
+            "conditional_signal",
+            "not_usable",
+            "not_applicable"
+          ]
+        }
+      }
+    },
+    "leverage_mechanics": {
+      "type": "object",
+      "required": [
+        "daily_reset_checked",
+        "both_directions_procyclical_checked",
+        "creation_redemption_checked",
+        "hedge_instruments_checked",
+        "product_level_attribution_limit"
+      ],
+      "properties": {
+        "daily_reset_checked": {
+          "type": "boolean"
+        },
+        "both_directions_procyclical_checked": {
+          "type": "boolean"
+        },
+        "creation_redemption_checked": {
+          "type": "boolean"
+        },
+        "hedge_instruments_checked": {
+          "type": "boolean"
+        },
+        "product_level_attribution_limit": {
+          "type": "string",
+          "minLength": 1
+        },
+        "exact_attributed_amount": {
+          "type": ["number", "null"]
+        }
+      }
+    },
+    "manipulation_hypothesis": {
+      "type": "object",
+      "required": [
+        "status",
+        "official_finding_status",
+        "evidence_present",
+        "evidence_missing",
+        "strategy_use"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "confirmed_official",
+            "supported_investigative",
+            "public_flow_only",
+            "unproven",
+            "not_assessed"
+          ]
+        },
+        "official_finding_status": {
+          "type": "string"
+        },
+        "evidence_present": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "evidence_missing": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "strategy_use": {
+          "type": "string",
+          "enum": [
+            "confirmed_fact",
+            "risk_hypothesis_only",
+            "not_permitted_as_trade_signal"
+          ]
+        }
+      }
+    },
+    "money_flow_state": {
+      "type": "string",
+      "enum": [
+        "broad_exit",
+        "sector_rotation",
+        "mixed_exit_rotation",
+        "unknown"
+      ]
+    },
+    "strategy_constraints": {
+      "type": "object",
+      "required": [
+        "probability_cap",
+        "new_entry_decision",
+        "leverage_decision",
+        "revalidation_conditions"
+      ],
+      "properties": {
+        "probability_cap": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "new_entry_decision": {
+          "type": "string",
+          "enum": [
+            "allowed_by_this_gate",
+            "conditional",
+            "watch_only",
+            "blocked"
+          ]
+        },
+        "leverage_decision": {
+          "type": "string",
+          "enum": [
+            "allowed_by_this_gate",
+            "blocked"
+          ]
+        },
+        "revalidation_conditions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "source_ids": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "unknowns": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "critical_blockers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

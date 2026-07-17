@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "crypto_risk_gate.schema.json",
+  "title": "Crypto Capital Custody Risk Gate",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["capital_survival_decision", "custody_counterparty_decision", "crypto_loss_budget", "stress_loss_fraction", "maximum_position", "unknowns", "critical_blockers", "new_order_allowed"],
+  "properties": {
+    "capital_survival_decision": {"enum": ["clear", "conditional", "watch_only", "blocked"]},
+    "custody_counterparty_decision": {"enum": ["clear", "conditional", "watch_only", "blocked"]},
+    "crypto_loss_budget": {"type": "number", "minimum": 0},
+    "stress_loss_fraction": {"type": "number", "exclusiveMinimum": 0, "maximum": 1},
+    "maximum_position": {"type": "number", "minimum": 0},
+    "stablecoin_decision": {"enum": ["not_applicable", "clear", "conditional", "watch_only", "blocked"]},
+    "yield_decision": {"enum": ["not_applicable", "clear", "conditional", "watch_only", "blocked"]},
+    "leverage_decision": {"enum": ["not_applicable", "hedge_only", "blocked"]},
+    "unknowns": {"type": "array", "items": {"type": "string"}},
+    "critical_blockers": {"type": "array", "items": {"type": "string"}},
+    "new_order_allowed": {"type": "boolean"}
+  }
+}
+

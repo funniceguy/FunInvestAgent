@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "financial_health_gate.schema.json",
+  "title": "Financial Health and Liquidity Gate",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["as_of", "base_currency", "inputs", "metrics", "stress", "unknowns", "critical_blockers", "decision", "evidence_ids"],
+  "properties": {
+    "as_of": {"type": "string", "minLength": 1},
+    "base_currency": {"type": "string", "minLength": 3, "maxLength": 3},
+    "inputs": {
+      "type": "object",
+      "required": ["monthly_net_income", "monthly_essential_spending", "monthly_debt_service", "liquid_assets", "near_term_obligations", "emergency_target_months", "max_debt_service_ratio"],
+      "properties": {
+        "monthly_net_income": {"type": "number", "minimum": 0},
+        "monthly_essential_spending": {"type": "number", "exclusiveMinimum": 0},
+        "monthly_debt_service": {"type": "number", "minimum": 0},
+        "liquid_assets": {"type": "number", "minimum": 0},
+        "near_term_obligations": {"type": "number", "minimum": 0},
+        "emergency_target_months": {"type": "number", "minimum": 0},
+        "max_debt_service_ratio": {"type": "number", "minimum": 0, "maximum": 1}
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "required": ["available_liquidity", "emergency_months", "emergency_shortfall", "debt_service_ratio", "monthly_surplus", "savings_rate", "investable_liquidity"],
+      "properties": {
+        "available_liquidity": {"type": "number", "minimum": 0},
+        "emergency_months": {"type": "number", "minimum": 0},
+        "emergency_shortfall": {"type": "number", "minimum": 0},
+        "debt_service_ratio": {"type": ["number", "null"], "minimum": 0},
+        "monthly_surplus": {"type": "number"},
+        "savings_rate": {"type": ["number", "null"]},
+        "investable_liquidity": {"type": "number", "minimum": 0}
+      }
+    },
+    "stress": {
+      "type": "object",
+      "required": ["income_shock_percent", "shocked_monthly_surplus", "deficit_runway_months", "forced_sale_risk"],
+      "properties": {
+        "income_shock_percent": {"type": "number", "minimum": 0, "maximum": 1},
+        "shocked_monthly_surplus": {"type": "number"},
+        "deficit_runway_months": {"type": ["number", "null"], "minimum": 0},
+        "forced_sale_risk": {"type": "boolean"}
+      }
+    },
+    "unknowns": {"type": "array", "items": {"type": "string"}},
+    "critical_blockers": {"type": "array", "items": {"type": "string"}},
+    "decision": {"enum": ["financial_clear", "financial_conditional", "stabilization_first", "financial_blocked"]},
+    "evidence_ids": {"type": "array", "items": {"type": "string"}}
+  }
+}
+

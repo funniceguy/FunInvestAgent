@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "crypto_verification_scorecard.schema.json",
+  "title": "Crypto Verification Scorecard",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["verify_round", "categories", "weighted_score", "unknown_count", "matured_unscored_count", "critical_blockers", "procedure_score", "realized_performance", "decision", "repairs"],
+  "properties": {
+    "verify_round": {"type": "integer", "minimum": 1, "maximum": 3},
+    "categories": {
+      "type": "array",
+      "minItems": 10,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "score", "minimum", "weight", "status", "evidence_ids"],
+        "properties": {
+          "id": {"enum": ["capital_survival", "official_source_freshness", "asset_contract_identity", "market_spot_derivatives_flow", "supply_protocol_due_diligence", "custody_counterparty_stablecoin", "staking_defi_yield_quality", "portfolio_execution_operations", "scenario_prediction_learning", "expression_legal_tax_safety"]},
+          "score": {"type": "number", "minimum": 0, "maximum": 100},
+          "minimum": {"type": "number", "minimum": 0, "maximum": 100},
+          "weight": {"type": "number", "minimum": 0, "maximum": 100},
+          "status": {"enum": ["passed", "failed", "not_applicable"]},
+          "evidence_ids": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    },
+    "weighted_score": {"type": "number", "minimum": 0, "maximum": 100},
+    "unknown_count": {"type": "integer", "minimum": 0},
+    "matured_unscored_count": {"type": "integer", "minimum": 0},
+    "critical_blockers": {"type": "array", "items": {"type": "string"}},
+    "procedure_score": {"type": "number", "minimum": 0, "maximum": 100},
+    "realized_performance": {"type": ["number", "null"]},
+    "decision": {"enum": ["pass", "conditional_pass", "hold", "stop"]},
+    "repairs": {"type": "array", "items": {"type": "string"}}
+  }
+}
+

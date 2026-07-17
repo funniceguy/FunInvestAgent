@@ -26,6 +26,38 @@
       "minimum": 0,
       "maximum": 100
     },
+    "process_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "realized_forecast_quality_score": {
+      "type": ["number", "null"],
+      "minimum": 0,
+      "maximum": 100
+    },
+    "execution_quality_score": {
+      "type": ["number", "null"],
+      "minimum": 0,
+      "maximum": 100
+    },
+    "risk_adherence_score": {
+      "type": ["number", "null"],
+      "minimum": 0,
+      "maximum": 100
+    },
+    "sample_status": {
+      "type": "string",
+      "enum": ["insufficient_sample", "provisional", "promotion_eligible", "not_applicable"]
+    },
+    "evidence_ids": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "unknown_count": {
+      "type": "integer",
+      "minimum": 0
+    },
     "iteration_count": {
       "type": "integer",
       "minimum": 1,
@@ -53,11 +85,40 @@
             "type": "string",
             "enum": [
               "input_suitability",
+              "capital_preservation_recovery_suitability",
               "data_reliability",
               "product_quote_execution_detail",
               "investor_psychology",
+              "cross_market_outcome_audit_suitability",
+              "weekly_forecast_learning_suitability",
+              "forecast_failure_postmortem_suitability",
               "forward_outlook_evidence_suitability",
+              "predictive_calibration_suitability",
+              "mechanical_flow_risk_suitability",
+              "market_integrity_causal_attribution_suitability",
+              "supply_overhang_order_flow_suitability",
+              "momentum_rotation_cycle_suitability",
+              "macro_causal_factor_matrix_suitability",
               "quality_value_screening_suitability",
+              "long_term_return_target_feasibility",
+              "long_term_valuation_durability_suitability",
+              "covered_call_income_quality_suitability",
+              "long_term_portfolio_stress_suitability",
+              "bond_source_structure_suitability",
+              "bond_credit_liquidity_suitability",
+              "bond_cashflow_portfolio_suitability",
+              "deposit_protection_product_accuracy",
+              "cash_deposit_bond_substitution_suitability",
+              "financial_health_liquidity_suitability",
+              "financial_goal_bucket_suitability",
+              "cross_asset_evidence_suitability",
+              "financial_scenario_stress_suitability",
+              "financial_learning_reviewability",
+              "crypto_capital_survival_suitability",
+              "crypto_market_protocol_suitability",
+              "crypto_custody_stablecoin_suitability",
+              "crypto_yield_defi_suitability",
+              "crypto_execution_learning_suitability",
               "aggressive_short_term_suitability",
               "us_intraday_order_timing_suitability",
               "leverage_product_suitability",

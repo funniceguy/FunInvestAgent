@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://funinvestagent.local/schemas/stock_momentum_rotation_cycle.schema.json",
+  "title": "StockMomentumRotationCycle",
+  "type": "object",
+  "required": [
+    "applied",
+    "decision",
+    "probabilities",
+    "primary_class",
+    "secondary_class",
+    "confidence",
+    "cycle_stage",
+    "evidence_domains",
+    "critical_blockers"
+  ],
+  "properties": {
+    "applied": {"type": "boolean"},
+    "decision": {"type": "string", "enum": ["cycle_actionable", "cycle_conditional", "cycle_watch_only", "cycle_blocked", "unknown"]},
+    "checked_at": {"type": "string", "format": "date-time"},
+    "display_name": {"type": "string"},
+    "symbol": {"type": "string"},
+    "probabilities": {
+      "type": "object",
+      "required": ["parabolic_event_momentum", "rotational_cyclical", "structural_trend_leader", "mean_reversion_rebound", "defensive_quality_rotation", "distribution_markdown", "hybrid_or_unknown"],
+      "properties": {
+        "parabolic_event_momentum": {"type": "number", "minimum": 0, "maximum": 100},
+        "rotational_cyclical": {"type": "number", "minimum": 0, "maximum": 100},
+        "structural_trend_leader": {"type": "number", "minimum": 0, "maximum": 100},
+        "mean_reversion_rebound": {"type": "number", "minimum": 0, "maximum": 100},
+        "defensive_quality_rotation": {"type": "number", "minimum": 0, "maximum": 100},
+        "distribution_markdown": {"type": "number", "minimum": 0, "maximum": 100},
+        "hybrid_or_unknown": {"type": "number", "minimum": 0, "maximum": 100}
+      }
+    },
+    "primary_class": {"type": "string"},
+    "secondary_class": {"type": "string"},
+    "confidence": {"type": "number", "minimum": 0, "maximum": 100},
+    "cycle_stage": {"type": "string"},
+    "evidence_domains": {
+      "type": "array",
+      "items": {"type": "string", "enum": ["price", "trading", "breadth_relative_strength", "flow", "catalyst", "fundamentals", "supply"]}
+    },
+    "transition_triggers": {"type": "array", "items": {"type": "string"}},
+    "invalidation_conditions": {"type": "array", "items": {"type": "string"}},
+    "holding_horizon": {"type": "string"},
+    "critical_blockers": {"type": "array", "items": {"type": "string"}},
+    "source_ids": {"type": "array", "items": {"type": "string"}}
+  }
+}

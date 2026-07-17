@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "bond_strategy_plan.schema.json",
+  "title": "Bond Strategy Plan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["strategy_id", "as_of", "assembly", "objective", "base_currency", "liquidity_dates", "instruments", "scenarios", "allocation_ranges", "risk_gate_decision", "stop_conditions", "review_schedule", "evidence_ids"],
+  "properties": {
+    "strategy_id": {"type": "string", "minLength": 1},
+    "as_of": {"type": "string", "minLength": 1},
+    "assembly": {"enum": ["individual_bond_ladder", "bond_etf_income", "duration_tactical", "stock_bond_long_term", "bond_review_rebuild"]},
+    "objective": {"type": "string", "minLength": 1},
+    "base_currency": {"type": "string", "minLength": 3, "maxLength": 3},
+    "liquidity_dates": {"type": "array", "items": {"type": "string"}},
+    "max_drawdown_budget": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+    "instruments": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["display_name", "identifier", "role", "currency", "duration", "credit_bucket", "liquidity", "decision"],
+        "properties": {
+          "display_name": {"type": "string"},
+          "identifier": {"type": "string"},
+          "role": {"enum": ["liquidity", "nominal_defense", "inflation_defense", "income_credit", "tactical_duration"]},
+          "currency": {"type": "string"},
+          "duration": {"type": ["number", "null"], "minimum": 0},
+          "credit_bucket": {"type": "string"},
+          "liquidity": {"enum": ["high", "medium", "low", "blocked", "unknown"]},
+          "decision": {"enum": ["eligible", "conditional", "watch_only", "excluded"]}
+        }
+      }
+    },
+    "scenarios": {
+      "type": "array",
+      "minItems": 4,
+      "items": {
+        "type": "object",
+        "required": ["name", "rate_shock_bp", "spread_shock_bp", "fx_shock_pct", "estimated_return_range", "trigger", "invalidation"],
+        "properties": {
+          "name": {"type": "string"},
+          "rate_shock_bp": {"type": "number"},
+          "spread_shock_bp": {"type": "number"},
+          "fx_shock_pct": {"type": "number"},
+          "estimated_return_range": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"type": "number"}},
+          "trigger": {"type": "string"},
+          "invalidation": {"type": "string"}
+        }
+      }
+    },
+    "allocation_ranges": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["sleeve", "min_weight", "max_weight"],
+        "properties": {
+          "sleeve": {"type": "string"},
+          "min_weight": {"type": "number", "minimum": 0, "maximum": 1},
+          "max_weight": {"type": "number", "minimum": 0, "maximum": 1}
+        }
+      }
+    },
+    "risk_gate_decision": {"enum": ["clear", "conditional", "watch_only", "blocked"]},
+    "stop_conditions": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "review_schedule": {"type": "string", "minLength": 1},
+    "evidence_ids": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "unknowns": {"type": "array", "items": {"type": "string"}}
+  }
+}
+

@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "financial_strategy_plan.schema.json",
+  "title": "Integrated Financial Strategy Plan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["strategy_id", "created_at", "base_currency", "assembly", "financial_health_gate", "goal_buckets", "orchestrator_decisions", "allocation_ranges", "scenarios", "operations", "verification", "source_ids"],
+  "properties": {
+    "strategy_id": {"type": "string", "minLength": 1},
+    "created_at": {"type": "string", "format": "date-time"},
+    "base_currency": {"type": "string", "minLength": 3, "maxLength": 3},
+    "assembly": {"enum": ["full_financial_strategy", "short_term_financial_stability", "long_term_wealth_strategy", "retirement_income_strategy", "financial_review_rebuild"]},
+    "financial_health_gate": {"$ref": "financial_health_gate.schema.json"},
+    "goal_buckets": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["goal_id", "bucket", "target_date", "target_amount", "current_funded_amount", "funded_ratio", "required_after_tax_real_return", "decision"],
+        "properties": {
+          "goal_id": {"type": "string"},
+          "bucket": {"enum": ["survival", "committed_spending", "medium_term", "long_term_growth", "retirement_income", "tactical_opportunity"]},
+          "target_date": {"type": ["string", "null"]},
+          "target_amount": {"type": "number", "minimum": 0},
+          "current_funded_amount": {"type": "number", "minimum": 0},
+          "funded_ratio": {"type": ["number", "null"], "minimum": 0},
+          "required_after_tax_real_return": {"type": ["number", "null"]},
+          "decision": {"enum": ["funded", "modelable", "target_rework", "blocked"]}
+        }
+      }
+    },
+    "orchestrator_decisions": {
+      "type": "object",
+      "required": ["cash_deposit", "stock", "bond", "crypto", "overall_floor"],
+      "properties": {
+        "cash_deposit": {"type": "string"},
+        "stock": {"type": "string"},
+        "bond": {"type": "string"},
+        "crypto": {"type": "string"},
+        "overall_floor": {"type": "string"}
+      }
+    },
+    "allocation_ranges": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["sleeve", "role", "min_weight", "max_weight", "gate_decision", "rebalance_band"],
+        "properties": {
+          "sleeve": {"type": "string"},
+          "role": {"type": "string"},
+          "min_weight": {"type": "number", "minimum": 0, "maximum": 1},
+          "max_weight": {"type": "number", "minimum": 0, "maximum": 1},
+          "gate_decision": {"type": "string"},
+          "rebalance_band": {"type": "number", "minimum": 0, "maximum": 1}
+        }
+      }
+    },
+    "scenarios": {
+      "type": "array",
+      "minItems": 4,
+      "items": {
+        "type": "object",
+        "required": ["name", "assumptions", "portfolio_loss", "cashflow_shortfall_date", "forced_sale", "goal_impacts", "response"],
+        "properties": {
+          "name": {"type": "string"},
+          "assumptions": {"type": "array", "items": {"type": "string"}},
+          "portfolio_loss": {"type": ["number", "null"]},
+          "cashflow_shortfall_date": {"type": ["string", "null"]},
+          "forced_sale": {"type": "boolean"},
+          "goal_impacts": {"type": "array", "items": {"type": "string"}},
+          "response": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    },
+    "operations": {
+      "type": "object",
+      "required": ["automatic_contributions", "withdrawal_order", "rebalancing_rule", "stop_conditions", "next_review_at"],
+      "properties": {
+        "automatic_contributions": {"type": "array", "items": {"type": "string"}},
+        "withdrawal_order": {"type": "array", "items": {"type": "string"}},
+        "rebalancing_rule": {"type": "string"},
+        "stop_conditions": {"type": "array", "items": {"type": "string"}},
+        "next_review_at": {"type": "string"}
+      }
+    },
+    "verification": {"$ref": "financial_verification_scorecard.schema.json"},
+    "source_ids": {"type": "array", "minItems": 1, "items": {"type": "string"}}
+  }
+}

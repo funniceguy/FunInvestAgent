@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "stock_long_term_portfolio_strategy.schema.json",
+  "title": "Stock Long-Term Portfolio Strategy",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["horizon_years", "target_gate", "sleeves", "scenario_returns", "stress_tests", "rebalancing", "review_schedule", "final_decision"],
+  "properties": {
+    "horizon_years": {"type": "number", "minimum": 3},
+    "target_gate": {"enum": ["modelable", "stretch", "speculative_only", "target_blocked", "guarantee_blocked"]},
+    "sleeves": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "required": ["name", "role", "target_min_percent", "target_max_percent", "benchmark"],
+        "properties": {
+          "name": {"enum": ["liquidity", "diversified_core", "quality_value_satellite", "income_satellite", "opportunity_cash_short_bonds"]},
+          "role": {"type": "string"},
+          "target_min_percent": {"type": "number", "minimum": 0, "maximum": 100},
+          "target_max_percent": {"type": "number", "minimum": 0, "maximum": 100},
+          "benchmark": {"type": "string"}
+        }
+      }
+    },
+    "scenario_returns": {
+      "type": "object",
+      "required": ["bear_after_tax", "base_after_tax", "bull_after_tax", "income_not_reinvested", "income_reinvested"],
+      "properties": {
+        "bear_after_tax": {"type": ["number", "null"]},
+        "base_after_tax": {"type": ["number", "null"]},
+        "bull_after_tax": {"type": ["number", "null"]},
+        "income_not_reinvested": {"type": ["number", "null"]},
+        "income_reinvested": {"type": ["number", "null"]}
+      }
+    },
+    "stress_tests": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "object",
+        "required": ["scenario", "drawdown", "recovery_plan"],
+        "properties": {
+          "scenario": {"type": "string"},
+          "drawdown": {"type": ["number", "null"]},
+          "recovery_plan": {"type": "string"}
+        }
+      }
+    },
+    "rebalancing": {"type": "string", "minLength": 1},
+    "review_schedule": {"type": "string", "minLength": 1},
+    "final_decision": {"enum": ["proceed", "conditional", "hold", "stop"]},
+    "evidence_ids": {"type": "array", "items": {"type": "string"}}
+  }
+}
+

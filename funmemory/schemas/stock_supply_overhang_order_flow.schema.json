@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://funinvestagent.local/schemas/stock_supply_overhang_order_flow.schema.json",
+  "title": "StockSupplyOverhangOrderFlow",
+  "type": "object",
+  "required": [
+    "applied",
+    "decision",
+    "data_as_of",
+    "coverage",
+    "state",
+    "confirmation_count",
+    "critical_blockers"
+  ],
+  "properties": {
+    "applied": {"type": "boolean"},
+    "decision": {"type": "string", "enum": ["flow_clear", "flow_caution", "flow_watch_only", "flow_blocked", "unknown"]},
+    "data_as_of": {"type": "string", "format": "date-time"},
+    "market": {"type": "string", "enum": ["KR", "US"]},
+    "session": {"type": "string"},
+    "coverage": {"type": "string", "enum": ["consolidated", "multi_venue", "single_venue", "broker_view", "unknown"]},
+    "snapshot_count": {"type": "integer", "minimum": 0},
+    "weighted_order_book_imbalance": {"type": ["number", "null"], "minimum": -1, "maximum": 1},
+    "executed_flow_imbalance": {"type": ["number", "null"], "minimum": -1, "maximum": 1},
+    "depth_persistence_score": {"type": ["number", "null"], "minimum": 0, "maximum": 100},
+    "state": {
+      "type": "string",
+      "enum": ["demand_absorption", "balanced", "supply_overhang", "hidden_supply_suspected", "liquidity_vacuum", "event_supply_risk", "unknown"]
+    },
+    "confirmation_count": {"type": "integer", "minimum": 0, "maximum": 4},
+    "confirmation_state": {"type": "string", "enum": ["unconfirmed", "watch", "confirmed", "strong_confirmed"]},
+    "overhead_supply_levels": {"type": "array", "items": {"type": "string"}},
+    "event_supply_calendar": {"type": "array", "items": {"type": "string"}},
+    "next_check_at": {"type": "string", "format": "date-time"},
+    "critical_blockers": {"type": "array", "items": {"type": "string"}},
+    "source_ids": {"type": "array", "items": {"type": "string"}}
+  }
+}

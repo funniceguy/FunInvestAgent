@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "stock_long_term_return_target_gate.schema.json",
+  "title": "Stock Long-Term Return Target Gate",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "target_type",
+    "monthly_rate_percent",
+    "effective_annual_rate_percent",
+    "guaranteed_language",
+    "gate",
+    "assumptions",
+    "redesign_actions"
+  ],
+  "properties": {
+    "target_type": {
+      "enum": ["cash_distribution", "price_return", "pretax_total_return", "after_tax_total_return"]
+    },
+    "monthly_rate_percent": {"type": ["number", "null"]},
+    "effective_annual_rate_percent": {"type": ["number", "null"]},
+    "guaranteed_language": {"type": "boolean"},
+    "gate": {
+      "enum": ["modelable", "stretch", "speculative_only", "target_blocked", "guarantee_blocked"]
+    },
+    "assumptions": {
+      "type": "object",
+      "required": ["horizon_years", "monthly_contribution", "monthly_withdrawal", "tax_status", "inflation_rate", "max_drawdown_tolerance"],
+      "properties": {
+        "horizon_years": {"type": ["number", "null"], "minimum": 0},
+        "monthly_contribution": {"type": ["number", "null"]},
+        "monthly_withdrawal": {"type": ["number", "null"]},
+        "tax_status": {"type": "string"},
+        "inflation_rate": {"type": ["number", "null"]},
+        "max_drawdown_tolerance": {"type": ["number", "null"]}
+      }
+    },
+    "redesign_actions": {
+      "type": "array",
+      "items": {"type": "string"},
+      "minItems": 1
+    },
+    "evidence_ids": {
+      "type": "array",
+      "items": {"type": "string"}
+    }
+  }
+}
+

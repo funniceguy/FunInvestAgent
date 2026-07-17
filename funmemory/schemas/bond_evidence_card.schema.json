@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "bond_evidence_card.schema.json",
+  "title": "Bond Evidence Card",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["evidence_id", "source_id", "source_url", "published_at", "data_as_of", "checked_at", "instrument", "facts", "interpretation", "limitations"],
+  "properties": {
+    "evidence_id": {"type": "string", "minLength": 1},
+    "source_id": {"type": "string", "minLength": 1},
+    "source_url": {"type": "string", "format": "uri"},
+    "published_at": {"type": ["string", "null"]},
+    "data_as_of": {"type": "string", "minLength": 1},
+    "checked_at": {"type": "string", "minLength": 1},
+    "source_tier": {"enum": ["official_primary", "issuer_primary", "regulated_market_data", "secondary", "unknown"]},
+    "instrument": {
+      "type": "object",
+      "required": ["display_name", "identifier", "instrument_type", "currency"],
+      "properties": {
+        "display_name": {"type": "string", "minLength": 1},
+        "identifier": {"type": "string", "minLength": 1},
+        "instrument_type": {"enum": ["government_bond", "treasury_bill", "inflation_linked", "floating_rate", "agency", "municipal", "corporate", "securitized", "bond_etf", "bond_fund", "target_maturity_etf", "other"]},
+        "currency": {"type": "string", "minLength": 3, "maxLength": 3},
+        "market": {"type": ["string", "null"]}
+      }
+    },
+    "facts": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "yield_fields": {
+      "type": "object",
+      "properties": {
+        "coupon_rate": {"type": ["number", "null"]},
+        "current_yield": {"type": ["number", "null"]},
+        "yield_to_maturity": {"type": ["number", "null"]},
+        "yield_to_call": {"type": ["number", "null"]},
+        "yield_to_worst": {"type": ["number", "null"]},
+        "sec_yield": {"type": ["number", "null"]},
+        "distribution_rate": {"type": ["number", "null"]}
+      }
+    },
+    "risk_fields": {
+      "type": "object",
+      "properties": {
+        "modified_duration": {"type": ["number", "null"], "minimum": 0},
+        "effective_duration": {"type": ["number", "null"], "minimum": 0},
+        "convexity": {"type": ["number", "null"]},
+        "credit_rating": {"type": ["string", "null"]},
+        "rating_outlook": {"type": ["string", "null"]},
+        "callable": {"type": ["boolean", "null"]},
+        "liquidity_status": {"enum": ["high", "medium", "low", "blocked", "unknown"]},
+        "fx_hedge_status": {"enum": ["not_applicable", "hedged", "partially_hedged", "unhedged", "unknown"]}
+      }
+    },
+    "calculations": {"type": "array", "items": {"type": "string"}},
+    "interpretation": {"type": "string", "minLength": 1},
+    "conflicting_evidence": {"type": "array", "items": {"type": "string"}},
+    "limitations": {"type": "array", "items": {"type": "string"}},
+    "next_check_at": {"type": ["string", "null"]}
+  }
+}
+
